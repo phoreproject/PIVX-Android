@@ -10,7 +10,7 @@
     android:paddingRight="12dp"
     android:paddingTop="20dp"
     android:gravity="left"
-    tools:context="pivx.org.pivxwallet.ui.base.BaseDrawerActivity">
+    tools:context="io.phore.android.ui.base.BaseDrawerActivity">
 
 
     <TextView

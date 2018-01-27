@@ -38,7 +38,6 @@
     <string name="btn_request">요청하기</string>
     <string name="settings_subtitle_security">보안</string>
     <string name="backup_wallet_message">백업파일은 암호와 함께 안전하게 암호화됩니다. \n 백업파일을 저장한 외부 저장 매체를 선택해주세요.</string>
-    <string name="settings_subtitle_preference">설정</string>
     <string name="settings_subtitle_about">About</string>
     <string name="restore_wallet">지갑 복구</string>
     <string name="backup_wallet">지갑 백업</string>
@@ -96,7 +95,6 @@
     <string name="currency_message">원하시는 현지 통화를 선택해주세요.</string>
     <string name="title_fee">수수료</string>
     <string name="title_currency">현지 통화</string>
-    <string name="title_pivx_send">송금 금액</string>
     <string name="empty_message_address">저장된 주소가 없습니다</string>
     <string name="error_message">거래내역중에 오류가 있습니다.</string>
     <string name="settings_change_trusted_node">신뢰할수 있는 노드로 변경</string>

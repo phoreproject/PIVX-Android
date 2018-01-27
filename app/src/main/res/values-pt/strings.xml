@@ -42,7 +42,6 @@ de uma unidade de armazenamento</string>
     <string name="backup_wallet_message">Sua cópia de segurança será encriptada com
 a senha que você escolher e será salva
 em uma unidade externa de armazenamento.</string>
-    <string name="settings_subtitle_preference">Preferência</string>
     <string name="settings_subtitle_about">Sobre</string>
     <string name="restore_wallet">Restaurar Carteira</string>
     <string name="backup_wallet">Cópia de segurança da Carteira</string>
@@ -104,7 +103,6 @@ Está salva na pasta em
 de sua preferência</string>
     <string name="title_fee">Taxa</string>
     <string name="title_currency">Moeda Local</string>
-    <string name="title_pivx_send">Quanti enviada</string>
     <string name="empty_message_address">Você ainda não possui nenhum endereço salvo.</string>
     <string name="error_message">Parece que há algo errado com a sua transação</string>
     <string name="settings_change_trusted_node">Alterar nó confiável</string>

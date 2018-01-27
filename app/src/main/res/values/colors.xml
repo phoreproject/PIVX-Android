@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="transparent">#00000000</color>
-    <color name="colorPrimary">#55476c</color>
-    <color name="colorPrimaryDark">#45385a</color>
-    <color name="colorAccent">#009688</color>
-    <color name="bgPurple">#55476c</color>
+    <!-- Phore Green -->
+    <color name="colorPrimary">#00CD8D</color>
+    <color name="colorPrimaryDark">#007F59</color>
+    <color name="colorAccent">#53DAB1</color>
+
+    <!-- Phore Background Green -->
+    <color name="bgGreen">#00CD8D</color>
     <color name="green">#009688</color>
     <color name="mainGreen">#B7FFF9</color>
     <color name="lightGreen">#50e3c2</color>
     <color name="colorPurple">#55476c</color>
+    <color name="bgGrey">#37404d</color>
     <color name="bgWhite">#ffffff</color>
     <color name="bgWhite30">#4Dffffff</color>
     <color name="bgBlack30">#4D000000</color>
@@ -36,9 +40,9 @@
 
     <!-- Tutorial -->
 
-    <color name="bg_screen1">#55476c</color>
-    <color name="bg_screen2">#73bdc5</color>
-    <color name="bg_screen3">#ed8557</color>
+    <color name="bg_screen1">#53DAB1</color>
+    <color name="bg_screen2">#2AD29F</color>
+    <color name="bg_screen3">#00A573</color>
 
 
     <!-- dots active colors -->

@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="pivx.org.pivxwallet.ui.base.BaseDrawerActivity">
+    tools:context="io.phore.android.ui.base.BaseDrawerActivity">
 
     <FrameLayout android:id="@+id/content"
         android:layout_width="match_parent"

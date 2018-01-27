@@ -47,7 +47,7 @@
                 android:maxWidth="180dp"
                 tools:text="DAE9XiuuCYgbGC2aTEZT8jnGStv3eWrWDw"
                 android:hint="Error"
-                android:textColor="@color/bgPurple"
+                android:textColor="@color/bgGreen"
                 android:textSize="16sp" />
 
             <TextView

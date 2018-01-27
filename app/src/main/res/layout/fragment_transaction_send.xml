@@ -52,7 +52,7 @@
                     android:layout_marginBottom="10dp"
                     android:maxLines="1"
                     android:maxLength="8"
-                    android:hint="@string/set_amount_piv"
+                    android:hint="@string/set_amount_phr"
                     android:text = ""
                     android:textColor = "#434343"
                     android:textSize = "20sp" />
@@ -107,7 +107,7 @@
 
 
                 <TextView
-                    android:id = "@+id/txt_show_piv"
+                    android:id = "@+id/txt_show"
                     android:layout_width = "wrap_content"
                     android:layout_height = "wrap_content"
                     android:text = "0 PIV"

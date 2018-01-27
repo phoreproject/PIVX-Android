@@ -33,7 +33,7 @@
             tools:text="1443 PIV"
             android:hint="@string/no_data_available"
             android:textStyle="bold"
-            android:textColor="@color/bgPurple"
+            android:textColor="@color/bgGreen"
             android:textSize="16sp" />
 
 
@@ -44,7 +44,7 @@
             android:ellipsize="end"
             android:lines="1"
             tools:text="DAE9XiuuCYgbGC2aTEZT8jnGStv3eWrWDw"
-            android:textColor="@color/bgPurple"
+            android:textColor="@color/bgGreen"
             android:textSize="13sp" />
 
 

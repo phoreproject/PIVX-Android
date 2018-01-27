@@ -38,7 +38,6 @@
     <string name="btn_request">Solicitar</string>
     <string name="settings_subtitle_security">Seguridad</string>
     <string name="backup_wallet_message">La copia será encriptada con \n la contraseña que usted elija y guardada \n en una unidad de almacenamiento.</string>
-    <string name="settings_subtitle_preference">Preferencia</string>
     <string name="settings_subtitle_about">Acerca de</string>
     <string name="restore_wallet">Restaurar Monedero</string>
     <string name="backup_wallet">Hacer Copia Seguridad del Monedero</string>
@@ -96,7 +95,6 @@
     <string name="currency_message">Seleccione su moneda local</string>
     <string name="title_fee">Comisión</string>
     <string name="title_currency">Divisa Local</string>
-    <string name="title_pivx_send">Cantidad enviada</string>
     <string name="empty_message_address">Todavía no tiene direcciones guardadas.</string>
     <string name="error_message">Parece que ha habido un error\n con su transacción</string>
     <string name="settings_change_trusted_node">Cambiar nodo de confianza</string>

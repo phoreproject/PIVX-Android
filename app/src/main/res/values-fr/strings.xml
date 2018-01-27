@@ -37,7 +37,6 @@
     <string name="btn_request">Requête</string>
     <string name="settings_subtitle_security">Sécurité</string>
     <string name="backup_wallet_message">Votre sauvegarde sera chiffré avec \n le mot de passe que vous avez choisi et sauvegardé sur un périphérique de stockage externe.</string>
-    <string name="settings_subtitle_preference">Paramètres</string>
     <string name="settings_subtitle_about">Á propos</string>
     <string name="restore_wallet">Récupérer un portefeuille</string>
     <string name="backup_wallet">Sauvegarder un portefeuille</string>
@@ -87,7 +86,6 @@
     <string name="unavailable">Solde non dépensable:</string>
     <string name="sending_tx">Envoi de la transaction..</string>
     <string name="title_fee">Frais</string>
-    <string name="title_pivx_send">Montant envoyé</string>
     <string name="empty_message_address">Vous n\'avez aucune adresse sauvegardé pour l\'instant.</string>
     <string name="error_message">On dirait qu\'il y a une erreur\n avec votre transaction</string>
     <string name="settings_reset_blockchain">Réinitialiser la blockchain</string>

@@ -38,7 +38,6 @@
     <string name="btn_request">Pyydä</string>
     <string name="settings_subtitle_security">Turvallisuus</string>
     <string name="backup_wallet_message">Varmuuskopiointisi salataan \n valitsemallasi salasanalla ja tallennetaan \n ulkoiselle tallennusasemalle.</string>
-    <string name="settings_subtitle_preference">Valinta</string>
     <string name="settings_subtitle_about">Tietoja</string>
     <string name="restore_wallet">Palauta Lompakko</string>
     <string name="backup_wallet">Varmuuskopioi Lompakko</string>
@@ -96,7 +95,6 @@
     <string name="currency_message">Valitse mieleisesi paikallinen valuutta</string>
     <string name="title_fee">Taksa</string>
     <string name="title_currency">Paikallinen Valuutta</string>
-    <string name="title_pivx_send">Lähetysmäärä</string>
     <string name="empty_message_address">Sinulla ei ole vielä yhtään tallennettua osoitetta.</string>
     <string name="error_message">Näyttää siltä että rahansiirrossasi on virhe</string>
     <string name="settings_change_trusted_node">Vaihda luotettu solmu</string>

@@ -27,7 +27,7 @@
 		android:layout_weight="1"
 		android:textAllCaps="true"
 		android:textSize="15sp"
-		android:textColor="@color/bgPurple"
+		android:textColor="@color/bgGreen"
 		android:textStyle="bold" />
 
 </LinearLayout>

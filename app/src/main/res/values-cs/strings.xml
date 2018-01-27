@@ -38,7 +38,6 @@
     <string name="btn_request">Požadavek</string>
     <string name="settings_subtitle_security">Bezpečnost</string>
     <string name="backup_wallet_message">Vaše záloha bude zašifrována \n heslem, který jste si zvolil(a) a uložil(a), \n na externí úložiště.</string>
-    <string name="settings_subtitle_preference">Volby</string>
     <string name="settings_subtitle_about">O produktu</string>
     <string name="restore_wallet">Obnovit Peněženku</string>
     <string name="backup_wallet">Zálohovat Peněženku</string>
@@ -96,7 +95,6 @@
     <string name="currency_message">Vyberte Vaší lokální měnu \n podle svého uvážení</string>
     <string name="title_fee">Poplatek</string>
     <string name="title_currency">Lokální měna</string>
-    <string name="title_pivx_send">Částka k odeslání</string>
     <string name="empty_message_address">Dosud nemáte uloženou žádnou adresu.</string>
     <string name="error_message">Objevila se chyba \npři zpracování Vaší transakce</string>
     <string name="settings_change_trusted_node">Změnit důvěryhodný uzel</string>

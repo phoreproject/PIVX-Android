@@ -9,7 +9,7 @@
         android:layout_height="match_parent"
         android:keepScreenOn="true" />
 
-    <pivx.org.pivxwallet.utils.scanner.ScannerView
+    <io.phore.android.utils.scanner.ScannerView
         android:id="@+id/scan_activity_mask"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
