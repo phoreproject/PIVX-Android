@@ -7,7 +7,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
 import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -197,10 +196,10 @@ public class SendActivity extends BaseActivity implements View.OnClickListener {
                         if (valueStr.charAt(0) == '.') {
                             valueStr = "0" + valueStr;
                         }
-                        BigDecimal result = new BigDecimal(valueStr).divide(phoreRate.getValue(), 6, BigDecimal.ROUND_DOWN);
+                        BigDecimal result = new BigDecimal(valueStr).divide(phoreRate.getRate(), 6, BigDecimal.ROUND_DOWN);
                         txtShow.setText(result.toPlainString() + getString(R.string.wallet_phr));
                     } else {
-                        txtShow.setText("0 " + phoreRate.getCoin());
+                        txtShow.setText("0 " + phoreRate.getCode());
                     }
                 }else {
                     txtShow.setText(R.string.no_rate);
@@ -231,9 +230,9 @@ public class SendActivity extends BaseActivity implements View.OnClickListener {
                         Coin coin = Coin.parseCoin(valueStr);
                         txt_local_currency.setText(
                                 phoreApplication.getCentralFormats().format(
-                                        new BigDecimal(coin.getValue() * phoreRate.getValue().doubleValue()).movePointLeft(8)
+                                        new BigDecimal(coin.getValue() * phoreRate.getRate().doubleValue()).movePointLeft(8)
                                 )
-                                        + " " + phoreRate.getCoin()
+                                        + " " + phoreRate.getCode()
                         );
                     }else {
                         // rate null -> no connection.
@@ -241,7 +240,7 @@ public class SendActivity extends BaseActivity implements View.OnClickListener {
                     }
                 }else {
                     if (phoreRate!=null)
-                        txt_local_currency.setText("0 "+phoreRate.getCoin());
+                        txt_local_currency.setText("0 "+phoreRate.getCode());
                     else
                         txt_local_currency.setText(R.string.no_rate);
                 }
@@ -387,15 +386,15 @@ public class SendActivity extends BaseActivity implements View.OnClickListener {
                 if (inPhrs) {
                     edit_amount.setText(coin.toPlainString());
                     txt_local_currency.setText(
-                            phoreApplication.getCentralFormats().format(
-                                    new BigDecimal(coin.getValue() * phoreRate.getValue().doubleValue()).movePointLeft(8)
-                            )
-                                    + " " + phoreRate.getCoin()
+                    phoreApplication.getCentralFormats().format(
+                            new BigDecimal(coin.getValue() * phoreRate.getRate().doubleValue()).movePointLeft(8)
+                    )
+                            + " " + phoreRate.getCode()
                     );
                 } else {
                     editCurrency.setText(
                             phoreApplication.getCentralFormats().format(
-                                    new BigDecimal(coin.getValue() * phoreRate.getValue().doubleValue()).movePointLeft(8)
+                                    new BigDecimal(coin.getValue() * phoreRate.getRate().doubleValue()).movePointLeft(8)
                             )
                     );
                     txtShow.setText(coin.toFriendlyString());
@@ -604,7 +603,7 @@ public class SendActivity extends BaseActivity implements View.OnClickListener {
                 if (valueStr.charAt(0) == '.') {
                     valueStr = "0" + valueStr;
                 }
-                BigDecimal result = new BigDecimal(valueStr).multiply(phoreRate.getValue());
+                BigDecimal result = new BigDecimal(valueStr).multiply(phoreRate.getRate());
                 amountStr = result.setScale(6, RoundingMode.FLOOR).toPlainString();
             }
         }
@@ -616,7 +615,7 @@ public class SendActivity extends BaseActivity implements View.OnClickListener {
             edit_amount.setText(amount.toPlainString());
             edit_amount.setEnabled(false);
         }else {
-            BigDecimal result = new BigDecimal(amount.toPlainString()).multiply(phoreRate.getValue()).setScale(6,RoundingMode.FLOOR);
+            BigDecimal result = new BigDecimal(amount.toPlainString()).multiply(phoreRate.getRate()).setScale(6,RoundingMode.FLOOR);
             editCurrency.setText(result.toPlainString());
             edit_amount.setEnabled(false);
         }

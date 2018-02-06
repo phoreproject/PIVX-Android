@@ -8,11 +8,9 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.LocalBroadcastManager;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,7 +27,6 @@ import org.phorej.wallet.Wallet;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import io.phore.android.PhoreApplication;
 import io.phore.android.R;
@@ -292,12 +289,12 @@ public class WalletActivity extends BaseDrawerActivity {
         if (phoreRate!=null) {
             txt_local_currency.setText(
                     phoreApplication.getCentralFormats().format(
-                            new BigDecimal(availableBalance.getValue() * phoreRate.getValue().doubleValue()).movePointLeft(8)
+                            new BigDecimal(availableBalance.getValue() * phoreRate.getRate().doubleValue()).movePointLeft(8)
                     )
-                    + " "+phoreRate.getCoin()
+                    + " "+phoreRate.getCode()
             );
         }else {
-            txt_local_currency.setText("0 USD");
+            txt_local_currency.setText("0 " + phoreRate.getCode());
         }
     }
 }

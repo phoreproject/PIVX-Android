@@ -66,8 +66,8 @@ public class RateDb extends AbstractSqliteDb<PhoreRate> {
     @Override
     protected ContentValues buildContent(PhoreRate obj) {
         ContentValues contentValues = new ContentValues();
-        contentValues.put(KEY_COIN,obj.getCoin());
-        contentValues.put(KEY_VALUE,obj.getValue().toEngineeringString());
+        contentValues.put(KEY_COIN,obj.getCode());
+        contentValues.put(KEY_VALUE,obj.getRate().toEngineeringString());
         contentValues.put(KEY_TIMESTAMP,obj.getTimestamp());
         contentValues.put(KEY_LINK,obj.getLink());
         return contentValues;
@@ -78,8 +78,7 @@ public class RateDb extends AbstractSqliteDb<PhoreRate> {
         String coin = cursor.getString(KEY_POS_COIN);
         BigDecimal value = new BigDecimal(cursor.getString(KEY_POS_VALUE));
         long timestap = cursor.getLong(KEY_POS_TIMESTAMP);
-        String link = cursor.getString(KEY_POS_LINK);
-        return new PhoreRate(coin,value,timestap,link);
+        return new PhoreRate(coin,value,timestap);
     }
 
     public PhoreRate getRate(String coin){
@@ -88,10 +87,10 @@ public class RateDb extends AbstractSqliteDb<PhoreRate> {
 
 
     public void insertOrUpdateIfExist(PhoreRate phoreRate) {
-        if (getRate(phoreRate.getCoin())==null){
+        if (getRate(phoreRate.getCode())==null){
             insert(phoreRate);
         }else {
-            updateByKey(KEY_COIN,phoreRate.getCoin(),phoreRate);
+            updateByKey(KEY_COIN,phoreRate.getCode(),phoreRate);
         }
     }
 }

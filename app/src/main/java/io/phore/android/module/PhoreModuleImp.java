@@ -604,6 +604,11 @@ public class PhoreModuleImp implements PhoreModule {
         }
     }
 
+    @Override
+    public List<PhoreRate> listRates() {
+        return rateDb.list();
+    }
+
 
     public void saveRate(PhoreRate phoreRate){
         rateDb.insertOrUpdateIfExist(phoreRate);

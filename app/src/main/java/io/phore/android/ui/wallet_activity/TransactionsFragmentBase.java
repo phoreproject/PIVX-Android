@@ -92,9 +92,9 @@ public class TransactionsFragmentBase extends BaseRecyclerFragment<TransactionWr
                 String localCurrency = null;
                 if (phoreRate!=null) {
                     localCurrency = phoreApplication.getCentralFormats().format(
-                                    new BigDecimal(data.getAmount().getValue() * phoreRate.getValue().doubleValue()).movePointLeft(8)
+                                    new BigDecimal(data.getAmount().getValue() * phoreRate.getRate().doubleValue()).movePointLeft(8)
                                     )
-                                    + " " + phoreRate.getCoin();
+                                    + " " + phoreRate.getCode();
                     holder.amountLocal.setText(localCurrency);
                     holder.amountLocal.setVisibility(View.VISIBLE);
                 }else {

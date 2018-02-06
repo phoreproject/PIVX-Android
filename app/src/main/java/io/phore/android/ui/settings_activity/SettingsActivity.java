@@ -31,6 +31,7 @@ import io.phore.android.ui.restore_activity.RestoreActivity;
 import io.phore.android.ui.settings_backup_activity.SettingsBackupActivity;
 import io.phore.android.ui.settings_network_activity.SettingsNetworkActivity;
 import io.phore.android.ui.settings_pincode_activity.SettingsPincodeActivity;
+import io.phore.android.ui.settings_rates.SettingsRatesActivity;
 import io.phore.android.ui.start_node_activity.StartNodeActivity;
 import io.phore.android.utils.CrashReporter;
 import io.phore.android.utils.DialogsUtil;
@@ -97,6 +98,9 @@ public class SettingsActivity extends BaseDrawerActivity implements View.OnClick
         btn_reset_blockchain = (Button) findViewById(R.id.btn_reset_blockchain);
         btn_reset_blockchain.setOnClickListener(this);
 
+        // rates
+        findViewById(R.id.btn_rates).setOnClickListener(this);
+
         // Open Network Monitor
         buttonChange = (Button) findViewById(R.id.btn_network);
         buttonChange.setOnClickListener(this);
@@ -160,6 +164,8 @@ public class SettingsActivity extends BaseDrawerActivity implements View.OnClick
             startActivity(new Intent(v.getContext(), ExportKeyActivity.class));
         }else if (id == R.id.btn_import_xpub){
             startActivity(new Intent(v.getContext(), SettingsWatchOnly.class));
+        }else if (id == R.id.btn_rates){
+            startActivity(new Intent(v.getContext(), SettingsRatesActivity.class));
         }
     }
 

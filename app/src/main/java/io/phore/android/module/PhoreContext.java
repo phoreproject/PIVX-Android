@@ -27,6 +27,9 @@ public class PhoreContext {
 
     public static final long PHORE_WALLET_APP_RELEASED_ON_PLAY_STORE_TIME = 1500940800;
 
+    /** Currency exchange rate */
+    public static final String URL_FIAT_CURRENCIES_RATE = "https://bitpay.com/rates";
+
     // report mail
     public static final String REPORT_EMAIL = "tmhorton@gmail.com";
     public static final String REPORT_SUBJECT_ISSUE = "Reported issue";

@@ -164,4 +164,7 @@ public interface PhoreModule {
     boolean sweepBalanceToNewSchema() throws InsufficientMoneyException, CantSweepBalanceException;
 
     boolean upgradeWallet(String upgradeCode) throws UpgradeException;
+
+    List<PhoreRate> listRates();
+
 }

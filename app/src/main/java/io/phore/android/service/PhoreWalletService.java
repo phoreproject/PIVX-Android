@@ -41,6 +41,7 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.math.BigDecimal;
 import java.util.EnumSet;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.Executors;
@@ -196,14 +197,24 @@ public class PhoreWalletService extends Service{
         public void run() {
             try {
                 CoinMarketCapApiClient c = new CoinMarketCapApiClient();
-                final BigDecimal usdValue = c.getPhorePrice();
-                mHandler.post(new Runnable() {
-                    public void run() {
-                        final AppConf appConf = phoreApplication.getAppConf();
-                        PhoreRate phoreRate = new PhoreRate(CoinTypes.USD.name(), usdValue, System.currentTimeMillis(), "coinmarketcap");
-                        module.saveRate(phoreRate);
+                CoinMarketCapApiClient.PhoreMarket phoreMarket = c.getPhorePrice();
+                PhoreRate phoreRate = new PhoreRate("USD",phoreMarket.priceUsd,System.currentTimeMillis());
+                module.saveRate(phoreRate);
+
+                final PhoreRate phoreBtcRate = new PhoreRate("BTC", phoreMarket.priceBtc, System.currentTimeMillis());
+                module.saveRate(phoreBtcRate);
+
+                // Get the rest of the rates:
+                List<PhoreRate> rates = new CoinMarketCapApiClient.BitPayApi().getRates(new CoinMarketCapApiClient.BitPayApi.RatesConvertor<PhoreRate>() {
+                    @Override
+                    public PhoreRate convertRate(String code, String name, BigDecimal bitcoinRate) {
+                        BigDecimal rate = bitcoinRate.multiply(phoreBtcRate.getRate());
+                        return new PhoreRate(code,rate,System.currentTimeMillis());
                     }
                 });
+                for (PhoreRate rate : rates) {
+                    module.saveRate(rate);
+                }
             } catch (RequestPhoreRateException e) {
                 e.printStackTrace();
             } catch (Exception e){
@@ -507,28 +518,6 @@ public class PhoreWalletService extends Service{
             );
             // save
             module.getConf().saveScheduleBlockchainService(scheduleTime);
-        }
-    }
-
-    private void requestRateCoin() {
-        final AppConf appConf = phoreApplication.getAppConf();
-        PhoreRate phoreRate = module.getRate(appConf.getSelectedRateCoin());
-        if (phoreRate==null || phoreRate.getTimestamp()+PhoreContext.RATE_UPDATE_TIME<System.currentTimeMillis()){
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        CoinMarketCapApiClient c = new CoinMarketCapApiClient();
-                        BigDecimal usdValue = c.getPhorePrice();
-                        PhoreRate phoreRate = new PhoreRate(CoinTypes.USD.name(),usdValue,System.currentTimeMillis(), "coinmarketcap");
-                        module.saveRate(phoreRate);
-                    } catch (RequestPhoreRateException e) {
-                        e.printStackTrace();
-                    } catch (Exception e){
-                        e.printStackTrace();
-                    }
-                }
-            }).start();
         }
     }
 
