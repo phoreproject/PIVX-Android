@@ -15,6 +15,7 @@ import android.os.Build;
 import android.os.IBinder;
 import android.os.Looper;
 import android.os.PowerManager;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
@@ -42,7 +43,10 @@ import java.math.BigDecimal;
 import java.util.EnumSet;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.ScheduledExecutorService;
 
 import chain.BlockchainManager;
 import chain.BlockchainState;
@@ -196,6 +200,45 @@ public class PhoreWalletService extends Service{
         }
     }
 
+
+    private final Handler mHandler = new Handler();
+    private final ScheduledExecutorService mRateScheduler = Executors.newScheduledThreadPool(1);
+    private ScheduledFuture<?> mRateFuture = null;
+
+    final Runnable mRateRunnable = new Runnable() {
+        public void run() {
+            try {
+                CoinMarketCapApiClient c = new CoinMarketCapApiClient();
+                final BigDecimal usdValue = c.getPhorePrice();
+                mHandler.post(new Runnable() {
+                    public void run() {
+                        final AppConf appConf = phoreApplication.getAppConf();
+                        PhoreRate phoreRate = new PhoreRate(CoinTypes.USD.name(), usdValue, System.currentTimeMillis(), "coinmarketcap");
+                        module.saveRate(phoreRate);
+                    }
+                });
+            } catch (RequestPhoreRateException e) {
+                e.printStackTrace();
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+     };
+
+    private void startRateTimer() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (mRateFuture == null && cm.getActiveNetworkInfo() != null) {
+            mRateFuture = mRateScheduler.scheduleAtFixedRate(mRateRunnable, 0, 60, TimeUnit.SECONDS);
+        }
+    }
+
+    private void stopRateTimer() {
+        if (mRateFuture != null) {
+            mRateFuture.cancel(true);
+            mRateFuture = null;
+        }
+    }
+
     private final BroadcastReceiver connectivityReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -205,13 +248,14 @@ public class PhoreWalletService extends Service{
                     final NetworkInfo networkInfo = (NetworkInfo) intent.getParcelableExtra(ConnectivityManager.EXTRA_NETWORK_INFO);
                     final boolean hasConnectivity = networkInfo.isConnected();
                     log.info("network is {}, state {}/{}", hasConnectivity ? "up" : "down", networkInfo.getState(), networkInfo.getDetailedState());
-                    if (hasConnectivity)
+                    if (hasConnectivity) {
                         impediments.remove(Impediment.NETWORK);
-                    else
+                        startRateTimer();
+                    } else {
                         impediments.add(Impediment.NETWORK);
+                        stopRateTimer();
+                    }
                     check();
-                    // try to request coin rate
-                    requestRateCoin();
                 } else if (Intent.ACTION_DEVICE_STORAGE_LOW.equals(action)) {
                     log.info("device storage low");
 
@@ -328,6 +372,8 @@ public class PhoreWalletService extends Service{
 
             // Schedule service
             tryScheduleService();
+            // Request rate
+            startRateTimer();
 
             peerConnectivityListener = new PeerConnectivityListener();
 
@@ -350,11 +396,6 @@ public class PhoreWalletService extends Service{
             intentFilter.addAction(Intent.ACTION_DEVICE_STORAGE_LOW);
             intentFilter.addAction(Intent.ACTION_DEVICE_STORAGE_OK);
             registerReceiver(connectivityReceiver, intentFilter); // implicitly init PeerGroup
-
-            // initilizing trusted node.
-            //phorePeergroup.start();
-
-
         } catch (Error e){
             e.printStackTrace();
             CrashReporter.appendSavedBackgroundTraces(e);
@@ -478,7 +519,7 @@ public class PhoreWalletService extends Service{
         }
     }
 
-    private void requestRateCoin(){
+    private void requestRateCoin() {
         final AppConf appConf = phoreApplication.getAppConf();
         PhoreRate phoreRate = module.getRate(appConf.getSelectedRateCoin());
         if (phoreRate==null || phoreRate.getTimestamp()+PhoreContext.RATE_UPDATE_TIME<System.currentTimeMillis()){
