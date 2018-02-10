@@ -18,6 +18,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.clans.fab.FloatingActionMenu;
+
 import org.phorej.core.Coin;
 import org.phorej.core.InsufficientMoneyException;
 import org.phorej.core.Transaction;
@@ -27,21 +29,19 @@ import org.phorej.wallet.Wallet;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
-import io.phore.android.PhoreApplication;
 import io.phore.android.R;
-import io.phore.android.module.CantSweepBalanceException;
 import io.phore.android.module.NoPeerConnectedException;
 import io.phore.android.rate.db.PhoreRate;
-import io.phore.android.service.IntentsConstants;
 import io.phore.android.ui.base.BaseDrawerActivity;
-import io.phore.android.ui.base.dialogs.DialogListener;
-import io.phore.android.ui.base.dialogs.SimpleTextDialog;
 import io.phore.android.ui.base.dialogs.SimpleTwoButtonsDialog;
 import io.phore.android.ui.qr_activity.QrActivity;
 import io.phore.android.ui.settings_backup_activity.SettingsBackupActivity;
+import io.phore.android.ui.transaction_request_activity.RequestActivity;
 import io.phore.android.ui.transaction_send_activity.SendActivity;
 import io.phore.android.ui.upgrade.UpgradeWalletActivity;
+import pivx.org.pivxwallet.utils.AnimationUtils;
 import io.phore.android.utils.DialogsUtil;
 import io.phore.android.utils.scanner.ScanActivity;
 
@@ -61,12 +61,12 @@ public class WalletActivity extends BaseDrawerActivity {
 
     private View root;
     private View container_txs;
-    private FloatingActionButton fab_add;
 
     private TextView txt_value;
     private TextView txt_unnavailable;
     private TextView txt_local_currency;
     private TextView txt_watch_only;
+    private View view_background;
     private PhoreRate phoreRate;
     private TransactionsFragmentBase txsFragment;
 
@@ -112,10 +112,9 @@ public class WalletActivity extends BaseDrawerActivity {
         container_txs = root.findViewById(R.id.container_txs);
         txt_local_currency = (TextView) containerHeader.findViewById(R.id.txt_local_currency);
         txt_watch_only = (TextView) containerHeader.findViewById(R.id.txt_watch_only);
-
+        view_background = root.findViewById(R.id.view_background);
         // Open Send
-        fab_add = (FloatingActionButton) root.findViewById(R.id.fab_add);
-        fab_add.setOnClickListener(new View.OnClickListener() {
+        root.findViewById(R.id.fab_add).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (phoreModule.isWalletWatchOnly()){
@@ -123,6 +122,24 @@ public class WalletActivity extends BaseDrawerActivity {
                     return;
                 }
                 startActivity(new Intent(v.getContext(), SendActivity.class));
+            }
+        });
+        root.findViewById(R.id.fab_request).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(v.getContext(), RequestActivity.class));
+            }
+        });
+
+        FloatingActionMenu floatingActionMenu = (FloatingActionMenu) root.findViewById(R.id.fab_menu);
+        floatingActionMenu.setOnMenuToggleListener(new FloatingActionMenu.OnMenuToggleListener() {
+            @Override
+            public void onMenuToggle(boolean opened) {
+                if (opened){
+                    AnimationUtils.fadeInView(view_background,400);
+                }else {
+                    AnimationUtils.fadeOutGoneView(view_background,400);
+                }
             }
         });
 

@@ -79,6 +79,9 @@ dependencies {
     compile 'ch.acra:acra:4.9.2'
     //compile 'com.bugsee:bugsee-android:+'
     compile project(':phoremore')
+
+    compile 'com.github.clans:fab:1.6.4'
+
     compile 'org.slf4j:slf4j-api:1.7.20'
     compile 'org.slf4j:slf4j-simple:1.7.5'
     compile 'junit:junit:4.12'
