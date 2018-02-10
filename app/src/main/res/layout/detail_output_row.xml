@@ -37,7 +37,7 @@
         android:paddingStart="8dp"
         android:paddingBottom="3dp"
         android:background="@drawable/transaction_inputs"
-        android:text = "40 PIV"
+        android:text = "40 PHR"
         android:textColor = "@color/subtitle"
         android:textSize = "14sp" />
 

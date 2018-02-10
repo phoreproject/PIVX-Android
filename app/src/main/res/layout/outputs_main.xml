@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/txt_total_amount"
             android:textColor = "@color/mainText"
-            android:text="3.13 PIV"/>
+            android:text="3.13 PHR"/>
     </LinearLayout>
 
 

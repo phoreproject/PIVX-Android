@@ -110,7 +110,7 @@
                     android:id = "@+id/txt_show"
                     android:layout_width = "wrap_content"
                     android:layout_height = "wrap_content"
-                    android:text = "0 PIV"
+                    android:text = "0 PHR"
                     android:textColor = "#858585"
                     android:textSize = "16sp" />
 
