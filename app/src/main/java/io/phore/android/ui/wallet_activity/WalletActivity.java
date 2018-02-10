@@ -41,7 +41,7 @@ import io.phore.android.ui.settings_backup_activity.SettingsBackupActivity;
 import io.phore.android.ui.transaction_request_activity.RequestActivity;
 import io.phore.android.ui.transaction_send_activity.SendActivity;
 import io.phore.android.ui.upgrade.UpgradeWalletActivity;
-import pivx.org.pivxwallet.utils.AnimationUtils;
+import io.phore.android.utils.AnimationUtils;
 import io.phore.android.utils.DialogsUtil;
 import io.phore.android.utils.scanner.ScanActivity;
 

@@ -3,9 +3,11 @@ package io.phore.android.ui.transaction_request_activity;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -22,10 +24,10 @@ import android.widget.Toast;
 
 import com.google.zxing.WriterException;
 
-import org.pivxj.core.Coin;
-import org.pivxj.core.NetworkParameters;
-import org.pivxj.core.Transaction;
-import org.pivxj.uri.PivxURI;
+import org.phorej.core.Coin;
+import org.phorej.core.NetworkParameters;
+import org.phorej.core.Transaction;
+import org.phorej.uri.PhoreURI;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,10 +40,13 @@ import io.phore.android.ui.transaction_send_activity.AmountInputFragment;
 import io.phore.android.ui.transaction_send_activity.MyFilterableAdapter;
 import io.phore.android.utils.DialogsUtil;
 import io.phore.android.utils.NavigationUtils;
+import io.phore.android.utils.scanner.ScanActivity;
 
+import static android.Manifest.permission_group.CAMERA;
 import static android.graphics.Color.WHITE;
 import static io.phore.android.ui.qr_activity.MyAddressFragment.convertDpToPx;
 import static io.phore.android.utils.QrUtils.encodeAsBitmap;
+import static io.phore.android.utils.scanner.ScanActivity.INTENT_EXTRA_RESULT;
 
 /**
  * Created by Neoperol on 5/11/17.
@@ -49,6 +54,8 @@ import static io.phore.android.utils.QrUtils.encodeAsBitmap;
 
 public class RequestActivity extends BaseActivity implements View.OnClickListener {
 
+    private static final int SCANNER_RESULT = 202
+            ;
     private AmountInputFragment amountFragment;
     private EditText edit_memo;
     private AutoCompleteTextView edit_address;
@@ -69,6 +76,7 @@ public class RequestActivity extends BaseActivity implements View.OnClickListene
         edit_address = (AutoCompleteTextView) root.findViewById(R.id.edit_address);
         amountFragment = (AmountInputFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_amount);
         root.findViewById(R.id.btnRequest).setOnClickListener(this);
+        findViewById(R.id.button_qr).setOnClickListener(this);
 
     }
 
@@ -77,7 +85,7 @@ public class RequestActivity extends BaseActivity implements View.OnClickListene
         super.onResume();
         // todo: This is not updating the filter..
         if (filterableAdapter == null) {
-            List<AddressLabel> list = new ArrayList<>(pivxModule.getContacts());
+            List<AddressLabel> list = new ArrayList<>(phoreModule.getContacts());
             filterableAdapter = new MyFilterableAdapter(this, list);
             edit_address.setAdapter(filterableAdapter);
         }
@@ -107,6 +115,15 @@ public class RequestActivity extends BaseActivity implements View.OnClickListene
                 e.printStackTrace();
                 showErrorDialog(e.getMessage());
             }
+        }else if (id == R.id.button_qr) {
+            if (!checkPermission(CAMERA)) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    int permsRequestCode = 200;
+                    String[] perms = {"android.permission.CAMERA"};
+                    requestPermissions(perms, permsRequestCode);
+                }
+            }
+            startActivityForResult(new Intent(this, ScanActivity.class), SCANNER_RESULT);
         }
     }
 
@@ -129,12 +146,12 @@ public class RequestActivity extends BaseActivity implements View.OnClickListene
         String memo = edit_memo.getText().toString();
 
         addressStr = edit_address.getText().toString();
-        if (!pivxModule.chechAddress(addressStr))
+        if (!phoreModule.chechAddress(addressStr))
             throw new IllegalArgumentException("Address not valid");
 
-        NetworkParameters params = pivxModule.getConf().getNetworkParams();
+        NetworkParameters params = phoreModule.getConf().getNetworkParams();
 
-        String pivxURI = PivxURI.convertToBitcoinURI(
+        String phoreURI = PhoreURI.convertToBitcoinURI(
                 params,
                 addressStr,
                 amount,
@@ -145,8 +162,8 @@ public class RequestActivity extends BaseActivity implements View.OnClickListene
         if (qrDialog != null){
             qrDialog = null;
         }
-        qrDialog = QrDialog.newInstance(pivxURI);
-        qrDialog.setQrText(pivxURI);
+        qrDialog = QrDialog.newInstance(phoreURI);
+        qrDialog.setQrText(phoreURI);
         qrDialog.show(getFragmentManager(),"qr_dialog");
 
     }
@@ -162,6 +179,30 @@ public class RequestActivity extends BaseActivity implements View.OnClickListene
             errorDialog.setBody(message);
         }
         errorDialog.show(getFragmentManager(), getResources().getString(R.string.send_error_dialog_tag));
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == SCANNER_RESULT) {
+            if (resultCode == RESULT_OK) {
+                String address = "";
+                try {
+                    address = data.getStringExtra(INTENT_EXTRA_RESULT);
+                    String usedAddress;
+                    if (phoreModule.chechAddress(address)) {
+                        usedAddress = address;
+                    } else {
+                        PhoreURI phoreUri = new PhoreURI(address);
+                        usedAddress = phoreUri.getAddress().toBase58();
+                    }
+                    final String tempPubKey = usedAddress;
+                    edit_address.setText(tempPubKey);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(this, "Invalid address " + address, Toast.LENGTH_LONG).show();
+                }
+            }
+        }
     }
 
     public static class QrDialog extends DialogFragment {
@@ -207,9 +248,9 @@ public class RequestActivity extends BaseActivity implements View.OnClickListene
             updateQr();
         }
 
-        public static QrDialog newInstance(String pivxURI) throws WriterException {
+        public static QrDialog newInstance(String phoreURI) throws WriterException {
             QrDialog qrDialog = new QrDialog();
-            qrDialog.setQrText(pivxURI);
+            qrDialog.setQrText(phoreURI);
             return qrDialog;
         }
     }

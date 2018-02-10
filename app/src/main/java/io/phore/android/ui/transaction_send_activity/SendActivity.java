@@ -27,7 +27,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
-<<<<<<< HEAD:app/src/main/java/io/phore/android/ui/transaction_send_activity/SendActivity.java
+import com.google.zxing.WriterException;
+
 import org.phorej.core.Address;
 import org.phorej.core.Coin;
 import org.phorej.core.InsufficientMoneyException;
@@ -37,19 +38,6 @@ import org.phorej.core.TransactionInput;
 import org.phorej.core.TransactionOutput;
 import org.phorej.uri.PhoreURI;
 import org.phorej.wallet.Wallet;
-=======
-import com.google.zxing.WriterException;
-
-import org.pivxj.core.Address;
-import org.pivxj.core.Coin;
-import org.pivxj.core.InsufficientMoneyException;
-import org.pivxj.core.NetworkParameters;
-import org.pivxj.core.Transaction;
-import org.pivxj.core.TransactionInput;
-import org.pivxj.core.TransactionOutput;
-import org.pivxj.uri.PivxURI;
-import org.pivxj.wallet.Wallet;
->>>>>>> de43ed79... Request Activity implemented.:app/src/main/java/pivx/org/pivxwallet/ui/transaction_send_activity/SendActivity.java
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -61,7 +49,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-<<<<<<< HEAD:app/src/main/java/io/phore/android/ui/transaction_send_activity/SendActivity.java
 import io.phore.android.R;
 import io.phore.android.contacts.AddressLabel;
 import io.phore.android.module.NoPeerConnectedException;
@@ -81,37 +68,16 @@ import io.phore.android.ui.wallet_activity.TransactionWrapper;
 import io.phore.android.utils.CrashReporter;
 import io.phore.android.utils.DialogsUtil;
 import io.phore.android.utils.NavigationUtils;
+import io.phore.android.utils.QrUtils;
 import io.phore.android.utils.scanner.ScanActivity;
-=======
-import pivx.org.pivxwallet.R;
-import pivx.org.pivxwallet.contacts.AddressLabel;
-import pivx.org.pivxwallet.module.NoPeerConnectedException;
-import pivx.org.pivxwallet.rate.db.PivxRate;
-import pivx.org.pivxwallet.service.PivxWalletService;
-import pivx.org.pivxwallet.ui.base.BaseActivity;
-import pivx.org.pivxwallet.ui.base.dialogs.SimpleTextDialog;
-import pivx.org.pivxwallet.ui.base.dialogs.SimpleTwoButtonsDialog;
-import pivx.org.pivxwallet.ui.transaction_send_activity.custom.ChangeAddressActivity;
-import pivx.org.pivxwallet.ui.transaction_send_activity.custom.CustomFeeActivity;
-import pivx.org.pivxwallet.ui.transaction_send_activity.custom.CustomFeeFragment;
-import pivx.org.pivxwallet.ui.transaction_send_activity.custom.inputs.InputWrapper;
-import pivx.org.pivxwallet.ui.transaction_send_activity.custom.inputs.InputsActivity;
-import pivx.org.pivxwallet.ui.transaction_send_activity.custom.outputs.OutputWrapper;
-import pivx.org.pivxwallet.ui.transaction_send_activity.custom.outputs.OutputsActivity;
-import pivx.org.pivxwallet.ui.wallet_activity.TransactionWrapper;
-import pivx.org.pivxwallet.utils.CrashReporter;
-import pivx.org.pivxwallet.utils.DialogsUtil;
-import pivx.org.pivxwallet.utils.NavigationUtils;
-import pivx.org.pivxwallet.utils.QrUtils;
-import pivx.org.pivxwallet.utils.scanner.ScanActivity;
->>>>>>> de43ed79... Request Activity implemented.:app/src/main/java/pivx/org/pivxwallet/ui/transaction_send_activity/SendActivity.java
 import wallet.exceptions.InsufficientInputsException;
 import wallet.exceptions.TxNotFoundException;
 
 import static android.Manifest.permission_group.CAMERA;
-<<<<<<< HEAD:app/src/main/java/io/phore/android/ui/transaction_send_activity/SendActivity.java
+import static android.graphics.Color.WHITE;
 import static io.phore.android.service.IntentsConstants.ACTION_BROADCAST_TRANSACTION;
 import static io.phore.android.service.IntentsConstants.DATA_TRANSACTION_HASH;
+import static io.phore.android.ui.qr_activity.MyAddressFragment.convertDpToPx;
 import static io.phore.android.ui.transaction_detail_activity.FragmentTxDetail.TX;
 import static io.phore.android.ui.transaction_detail_activity.FragmentTxDetail.TX_MEMO;
 import static io.phore.android.ui.transaction_detail_activity.FragmentTxDetail.TX_WRAPPER;
@@ -125,28 +91,8 @@ import static io.phore.android.ui.transaction_send_activity.custom.CustomFeeFrag
 import static io.phore.android.ui.transaction_send_activity.custom.inputs.InputsFragment.INTENT_EXTRA_UNSPENT_WRAPPERS;
 import static io.phore.android.ui.transaction_send_activity.custom.outputs.OutputsActivity.INTENT_EXTRA_OUTPUTS_CLEAR;
 import static io.phore.android.ui.transaction_send_activity.custom.outputs.OutputsActivity.INTENT_EXTRA_OUTPUTS_WRAPPERS;
+import static io.phore.android.utils.QrUtils.encodeAsBitmap;
 import static io.phore.android.utils.scanner.ScanActivity.INTENT_EXTRA_RESULT;
-=======
-import static android.graphics.Color.WHITE;
-import static pivx.org.pivxwallet.service.IntentsConstants.ACTION_BROADCAST_TRANSACTION;
-import static pivx.org.pivxwallet.service.IntentsConstants.DATA_TRANSACTION_HASH;
-import static pivx.org.pivxwallet.ui.qr_activity.MyAddressFragment.convertDpToPx;
-import static pivx.org.pivxwallet.ui.transaction_detail_activity.FragmentTxDetail.TX;
-import static pivx.org.pivxwallet.ui.transaction_detail_activity.FragmentTxDetail.TX_MEMO;
-import static pivx.org.pivxwallet.ui.transaction_detail_activity.FragmentTxDetail.TX_WRAPPER;
-import static pivx.org.pivxwallet.ui.transaction_send_activity.custom.ChangeAddressActivity.INTENT_EXTRA_CHANGE_ADDRESS;
-import static pivx.org.pivxwallet.ui.transaction_send_activity.custom.ChangeAddressActivity.INTENT_EXTRA_CHANGE_SEND_ORIGIN;
-import static pivx.org.pivxwallet.ui.transaction_send_activity.custom.CustomFeeFragment.INTENT_EXTRA_CLEAR;
-import static pivx.org.pivxwallet.ui.transaction_send_activity.custom.CustomFeeFragment.INTENT_EXTRA_FEE;
-import static pivx.org.pivxwallet.ui.transaction_send_activity.custom.CustomFeeFragment.INTENT_EXTRA_IS_FEE_PER_KB;
-import static pivx.org.pivxwallet.ui.transaction_send_activity.custom.CustomFeeFragment.INTENT_EXTRA_IS_MINIMUM_FEE;
-import static pivx.org.pivxwallet.ui.transaction_send_activity.custom.CustomFeeFragment.INTENT_EXTRA_IS_TOTAL_FEE;
-import static pivx.org.pivxwallet.ui.transaction_send_activity.custom.inputs.InputsFragment.INTENT_EXTRA_UNSPENT_WRAPPERS;
-import static pivx.org.pivxwallet.ui.transaction_send_activity.custom.outputs.OutputsActivity.INTENT_EXTRA_OUTPUTS_CLEAR;
-import static pivx.org.pivxwallet.ui.transaction_send_activity.custom.outputs.OutputsActivity.INTENT_EXTRA_OUTPUTS_WRAPPERS;
-import static pivx.org.pivxwallet.utils.QrUtils.encodeAsBitmap;
-import static pivx.org.pivxwallet.utils.scanner.ScanActivity.INTENT_EXTRA_RESULT;
->>>>>>> de43ed79... Request Activity implemented.:app/src/main/java/pivx/org/pivxwallet/ui/transaction_send_activity/SendActivity.java
 
 /**
  * Created by Neoperol on 5/4/17.

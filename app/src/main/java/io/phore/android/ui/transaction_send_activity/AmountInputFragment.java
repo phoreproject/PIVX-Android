@@ -1,4 +1,4 @@
-package pivx.org.pivxwallet.ui.transaction_send_activity;
+package io.phore.android.ui.transaction_send_activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,14 +15,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
-import org.pivxj.core.Coin;
+import org.phorej.core.Coin;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-import pivx.org.pivxwallet.R;
-import pivx.org.pivxwallet.rate.db.PivxRate;
-import pivx.org.pivxwallet.ui.base.BaseFragment;
+import io.phore.android.R;
+import io.phore.android.rate.db.PhoreRate;
+import io.phore.android.ui.base.BaseFragment;
 
 /**
  * Created by furszy on 2/9/18.
@@ -36,7 +36,7 @@ public class AmountInputFragment extends BaseFragment implements View.OnClickLis
     private TextView txt_currency_amount, txtShowPiv,txt_local_currency;
     private ImageButton btnSwap;
     private ViewFlipper amountSwap;
-    private PivxRate pivxRate;
+    private PhoreRate phoreRate;
     private boolean inPivs = true;
 
     @Nullable
@@ -58,9 +58,9 @@ public class AmountInputFragment extends BaseFragment implements View.OnClickLis
         btnSwap = (ImageButton) root.findViewById(R.id.btn_swap);
         btnSwap.setOnClickListener(this);
 
-        pivxRate = pivxModule.getRate(pivxApplication.getAppConf().getSelectedRateCoin());
+        phoreRate = phoreModule.getRate(phoreApplication.getAppConf().getSelectedRateCoin());
 
-        txt_local_currency.setText("0 " + pivxRate.getCode());
+        txt_local_currency.setText("0 " + phoreRate.getCode());
 
         editCurrency.addTextChangedListener(new TextWatcher() {
             @Override
@@ -75,16 +75,16 @@ public class AmountInputFragment extends BaseFragment implements View.OnClickLis
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (pivxRate != null) {
+                if (phoreRate != null) {
                     if (s.length() > 0) {
                         String valueStr = s.toString();
                         if (valueStr.charAt(0) == '.') {
                             valueStr = "0" + valueStr;
                         }
-                        BigDecimal result = new BigDecimal(valueStr).divide(pivxRate.getRate(), 6, BigDecimal.ROUND_DOWN);
+                        BigDecimal result = new BigDecimal(valueStr).divide(phoreRate.getRate(), 6, BigDecimal.ROUND_DOWN);
                         txtShowPiv.setText(result.toPlainString() + " PIV");
                     } else {
-                        txtShowPiv.setText("0 " + pivxRate.getCode());
+                        txtShowPiv.setText("0 " + phoreRate.getCode());
                     }
                 }else {
                     txtShowPiv.setText(R.string.no_rate);
@@ -106,25 +106,25 @@ public class AmountInputFragment extends BaseFragment implements View.OnClickLis
             @Override
             public void afterTextChanged(Editable s) {
                 if (s.length()>0) {
-                    if (pivxRate != null) {
+                    if (phoreRate != null) {
                         String valueStr = s.toString();
                         if (valueStr.charAt(0) == '.') {
                             valueStr = "0" + valueStr;
                         }
                         Coin coin = Coin.parseCoin(valueStr);
                         txt_local_currency.setText(
-                                pivxApplication.getCentralFormats().format(
-                                        new BigDecimal(coin.getValue() * pivxRate.getRate().doubleValue()).movePointLeft(8)
+                                phoreApplication.getCentralFormats().format(
+                                        new BigDecimal(coin.getValue() * phoreRate.getRate().doubleValue()).movePointLeft(8)
                                 )
-                                        + " " + pivxRate.getCode()
+                                        + " " + phoreRate.getCode()
                         );
                     }else {
                         // rate null -> no connection.
                         txt_local_currency.setText(R.string.no_rate);
                     }
                 }else {
-                    if (pivxRate!=null)
-                        txt_local_currency.setText("0 "+pivxRate.getCode());
+                    if (phoreRate!=null)
+                        txt_local_currency.setText("0 "+phoreRate.getCode());
                     else
                         txt_local_currency.setText(R.string.no_rate);
                 }
@@ -147,7 +147,7 @@ public class AmountInputFragment extends BaseFragment implements View.OnClickLis
                 if (valueStr.charAt(0) == '.') {
                     valueStr = "0" + valueStr;
                 }
-                BigDecimal result = new BigDecimal(valueStr).multiply(pivxRate.getRate());
+                BigDecimal result = new BigDecimal(valueStr).multiply(phoreRate.getRate());
                 amountStr = result.setScale(6, RoundingMode.FLOOR).toPlainString();
             }
         }

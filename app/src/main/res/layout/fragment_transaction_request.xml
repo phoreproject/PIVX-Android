@@ -9,7 +9,7 @@
     <fragment
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:name="pivx.org.pivxwallet.ui.transaction_send_activity.AmountInputFragment"
+        android:name="io.phore.android.ui.transaction_send_activity.AmountInputFragment"
         android:id="@+id/fragment_amount"
         />
 
@@ -48,9 +48,4 @@
 
     </LinearLayout>
 
-<<<<<<< HEAD
 </LinearLayout>
-=======
-
-</LinearLayout>
->>>>>>> de43ed79... Request Activity implemented.
