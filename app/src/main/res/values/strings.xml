@@ -68,8 +68,8 @@
     <string name="action_scan">scanner</string>
     <string name="btn_select_node">Add node</string>
 
-    <string name="title_no_trusted_peer_connection">Peer issue</string>
-    <string name="message_no_trusted_peer_connection">Trusted peer connection fail</string>
+    <string name="title_no_trusted_peer_connection">Network issue</string>
+    <string name="message_no_trusted_peer_connection">Unable to connect to Phore network.</string>
     <string name="share_address_text">Share address</string>
     <string name="error_sending_coins">Send coins fail</string>
 
@@ -365,7 +365,7 @@
     <string name="upgrade_wallet">Upgrade Wallet</string>
     <string name="upgrade_succesfull">Upgrade was successful!, please wait some time before the wallet is sync again</string>
     <string name="write_external_denied">Permission denied to write in the external storage</string>
-    <string name="message_connection_is_needed">Peer connection is needed to execute this task, please check if your internet is active or if you are using a trusted node check if it is online.</string>
+    <string name="message_connection_is_needed">Peer connection is needed to execute this task, please check if your internet is active.</string>
     <string name="no_rate">No rate</string>
     <string name="change_address_explain">You can customize the change address of your transaction specifing it or checking the box below and sending the amount to the origin (if there is more than one origin the wallet will chose the address with the highest value).</string>
     <string name="change_address_origin">Send it to origin.</string>
