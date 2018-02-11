@@ -60,7 +60,10 @@ public class AmountInputFragment extends BaseFragment implements View.OnClickLis
 
         phoreRate = phoreModule.getRate(phoreApplication.getAppConf().getSelectedRateCoin());
 
-        txt_local_currency.setText("0 " + phoreRate.getCode());
+        if (phoreRate != null)
+            txt_local_currency.setText("0 " + phoreRate.getCode());
+        else
+            txt_local_currency.setText("0");
 
         editCurrency.addTextChangedListener(new TextWatcher() {
             @Override

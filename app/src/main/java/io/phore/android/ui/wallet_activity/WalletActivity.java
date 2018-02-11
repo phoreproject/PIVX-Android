@@ -1,5 +1,6 @@
 package io.phore.android.ui.wallet_activity;
 
+import android.app.DialogFragment;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -35,6 +36,7 @@ import io.phore.android.R;
 import io.phore.android.module.NoPeerConnectedException;
 import io.phore.android.rate.db.PhoreRate;
 import io.phore.android.ui.base.BaseDrawerActivity;
+import io.phore.android.ui.base.dialogs.SimpleTextDialog;
 import io.phore.android.ui.base.dialogs.SimpleTwoButtonsDialog;
 import io.phore.android.ui.qr_activity.QrActivity;
 import io.phore.android.ui.settings_backup_activity.SettingsBackupActivity;
@@ -49,6 +51,9 @@ import static android.Manifest.permission.CAMERA;
 import static io.phore.android.service.IntentsConstants.ACTION_NOTIFICATION;
 import static io.phore.android.service.IntentsConstants.INTENT_BROADCAST_DATA_ON_COIN_RECEIVED;
 import static io.phore.android.service.IntentsConstants.INTENT_BROADCAST_DATA_TYPE;
+import static io.phore.android.ui.transaction_send_activity.SendActivity.INTENT_ADDRESS;
+import static io.phore.android.ui.transaction_send_activity.SendActivity.INTENT_EXTRA_TOTAL_AMOUNT;
+import static io.phore.android.ui.transaction_send_activity.SendActivity.INTENT_MEMO;
 import static io.phore.android.utils.scanner.ScanActivity.INTENT_EXTRA_RESULT;
 
 /**
@@ -264,12 +269,40 @@ public class WalletActivity extends BaseDrawerActivity {
             if (resultCode==RESULT_OK) {
                 try {
                     String address = data.getStringExtra(INTENT_EXTRA_RESULT);
-                    String usedAddress;
+                    final String usedAddress;
                     if (phoreModule.chechAddress(address)){
                         usedAddress = address;
                     }else {
                         PhoreURI phoreUri = new PhoreURI(address);
                         usedAddress = phoreUri.getAddress().toBase58();
+                        final Coin amount = phoreUri.getAmount();
+                        if (amount != null){
+                            final String memo = phoreUri.getMessage();
+                            StringBuilder text = new StringBuilder();
+                            text.append(getString(R.string.amount)).append(": ").append(amount.toFriendlyString());
+                            if (memo != null){
+                                text.append("\n").append(getString(R.string.description)).append(": ").append(memo);
+                            }
+
+                            SimpleTextDialog dialogFragment = DialogsUtil.buildSimpleTextDialog(this,
+                                    getString(R.string.payment_request_received),
+                                    text.toString())
+                                .setOkBtnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        Intent intent = new Intent(v.getContext(), SendActivity.class);
+                                        intent.putExtra(INTENT_ADDRESS,usedAddress);
+                                        intent.putExtra(INTENT_EXTRA_TOTAL_AMOUNT,amount);
+                                        intent.putExtra(INTENT_MEMO,memo);
+                                        startActivity(intent);
+                                    }
+                                });
+                            dialogFragment.setAlignBody(SimpleTextDialog.Align.LEFT);
+                            dialogFragment.setImgAlertRes(R.drawable.ic_fab_recieve);
+                            dialogFragment.show(getFragmentManager(),"payment_request_dialog");
+                            return;
+                        }
+
                     }
                     DialogsUtil.showCreateAddressLabelDialog(this,usedAddress);
                 }catch (Exception e){
