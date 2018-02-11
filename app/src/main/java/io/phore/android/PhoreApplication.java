@@ -151,13 +151,9 @@ public class PhoreApplication extends Application implements ContextWrapper {
             appConf = new AppConf(getSharedPreferences(AppConf.PREFERENCE_NAME, MODE_PRIVATE));
             centralFormats = new CentralFormats(appConf);
             WalletConfiguration walletConfiguration = new WalletConfImp(getSharedPreferences("phore_wallet",MODE_PRIVATE));
-            //todo: add this on the initial wizard..
-            //walletConfiguration.saveTrustedNode(HardcodedConstants.TESTNET_HOST,0);
-            //AddressStore addressStore = new SnappyStore(getDirPrivateMode("address_store").getAbsolutePath());
             ContactsStore contactsStore = new ContactsStore(this);
             phoreModule = new PhoreModuleImp(this, walletConfiguration,contactsStore,new RateDb(this));
             phoreModule.start();
-
         } catch (Exception e){
             e.printStackTrace();
         }

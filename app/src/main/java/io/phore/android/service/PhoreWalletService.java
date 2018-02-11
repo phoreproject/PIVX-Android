@@ -151,22 +151,9 @@ public class PhoreWalletService extends Service{
     }
 
     private final PeerDataEventListener blockchainDownloadListener = new AbstractPeerDataEventListener() {
-
         @Override
         public void onBlocksDownloaded(final Peer peer, final Block block, final FilteredBlock filteredBlock, final int blocksLeft) {
             try {
-                //log.info("Block received , left: " + blocksLeft);
-
-            /*log.info("############# on Blockcs downloaded ###########");
-            log.info("Peer: " + peer + ", Block: " + block + ", left: " + blocksLeft);*/
-
-
-            /*if (PhoreContext.IS_TEST)
-                showBlockchainSyncNotification(blocksLeft);*/
-
-                //delayHandler.removeCallbacksAndMessages(null);
-
-
                 final long now = System.currentTimeMillis();
                 if (now - lastMessageTime > TimeUnit.SECONDS.toMillis(6)) {
                     if (blocksLeft < 6) {
@@ -308,15 +295,17 @@ public class PhoreWalletService extends Service{
                     resultIntent.setAction(ACTION_CANCEL_COINS_RECEIVED);
                     deleteIntent = PendingIntent.getService(PhoreWalletService.this, 0, resultIntent, PendingIntent.FLAG_CANCEL_CURRENT);
                     mBuilder = new NotificationCompat.Builder(getApplicationContext())
-                            .setContentTitle("Pivs received!")
-                            .setContentText("Coins received for a value of " + notificationAccumulatedAmount.toFriendlyString())
+                            .setContentTitle(
+                                PhoreWalletService.this.getString(R.string.notification_receive_title))
+                            .setContentText(String.format(
+                                PhoreWalletService.this.getString(R.string.notification_receive_message),
+                                notificationAccumulatedAmount.toFriendlyString()))
                             .setAutoCancel(true)
-                            .setSmallIcon(R.mipmap.ic_launcher)
+                            .setSmallIcon(R.mipmap.ic_notification)
                             .setColor(
-                                    (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) ?
-                                            getResources().getColor(R.color.bgGreen, null)
-                                            :
-                                            ContextCompat.getColor(PhoreWalletService.this, R.color.bgGreen))
+                                (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+                                ? getResources().getColor(R.color.bgGreen, null)
+                                : ContextCompat.getColor(PhoreWalletService.this, R.color.bgGreen))
                             .setDeleteIntent(deleteIntent)
                             .setContentIntent(openPendingIntent);
                     nm.notify(NOT_COINS_RECEIVED, mBuilder.build());

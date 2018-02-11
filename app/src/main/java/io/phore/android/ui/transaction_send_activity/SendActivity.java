@@ -657,7 +657,7 @@ public class SendActivity extends BaseActivity implements View.OnClickListener {
             if (amount.isZero()) throw new IllegalArgumentException("Amount zero, please correct it");
             if (amount.isLessThan(Transaction.MIN_NONDUST_OUTPUT)) throw new IllegalArgumentException("Amount must be greater than the minimum amount accepted from miners, "+Transaction.MIN_NONDUST_OUTPUT.toFriendlyString());
             if (amount.isGreaterThan(Coin.valueOf(phoreModule.getAvailableBalance())))
-                throw new IllegalArgumentException("Insuficient balance");
+                throw new IllegalArgumentException("Insufficient balance");
 
             // memo
             String memo = edit_memo.getText().toString();
@@ -757,10 +757,10 @@ public class SendActivity extends BaseActivity implements View.OnClickListener {
 
         } catch (InsufficientMoneyException e) {
             e.printStackTrace();
-            throw new IllegalArgumentException("Insuficient balance\nMissing coins "+e.missing.toFriendlyString());
+            throw new IllegalArgumentException("Insufficient balance\nMissing coins "+e.missing.toFriendlyString());
         } catch (InsufficientInputsException e) {
             e.printStackTrace();
-            throw new IllegalArgumentException("Insuficient balance\nMissing coins "+e.getMissing().toFriendlyString());
+            throw new IllegalArgumentException("Insufficient balance\nMissing coins "+e.getMissing().toFriendlyString());
         } catch (Wallet.DustySendRequested e){
             e.printStackTrace();
             throw new IllegalArgumentException("Dusty send output, please increase the value of your outputs");
