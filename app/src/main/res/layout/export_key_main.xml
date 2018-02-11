@@ -55,7 +55,7 @@
         android:textSize="14sp"
         android:textColor="@color/subtitle"
         android:layout_below="@+id/txt_title_derivation_path"
-        tools:text="M / 44' / 119' / 0' "/>
+        tools:text="M / 44' / 444' / 0' "/>
 
 
     <ImageView
