@@ -12,11 +12,7 @@ import phoremore.PhorePeerData;
 public class PhoreGlobalData {
 
     public static final String[] TRUSTED_NODES = new String[] {
-        "10.0.3.2",
-        // "45.77.140.43",
-        // "217.182.83.168",
-        // "207.246.120.133",
-        // "207.148.26.232",
+        "phore.timhorton.ninja",
     };
 
     public static final List<PhorePeerData> listTrustedHosts() {
