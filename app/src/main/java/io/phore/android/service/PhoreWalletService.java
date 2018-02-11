@@ -380,6 +380,8 @@ public class PhoreWalletService extends Service{
             File file = getDir("blockstore_v2",MODE_PRIVATE);
             String filename = PhoreContext.Files.BLOCKCHAIN_FILENAME;
             boolean fileExists = new File(file,filename).exists();
+
+            org.phorej.core.Context.propagate(PhoreContext.CONTEXT);
             blockchainStore = new SnappyBlockchainStore(PhoreContext.CONTEXT,file,filename);
             blockchainManager.init(
                     blockchainStore,
@@ -495,8 +497,8 @@ public class PhoreWalletService extends Service{
         if (!isSchedule){
             log.info("scheduling service");
             AlarmManager alarm = (AlarmManager)getSystemService(ALARM_SERVICE);
-            long scheduleTime = System.currentTimeMillis() + 1000 * 15; //(1000 * 60 * 60);
-            // long scheduleTime = System.currentTimeMillis();
+            // long scheduleTime = System.currentTimeMillis() + 1000 * 15; //(1000 * 60 * 60);
+            long scheduleTime = System.currentTimeMillis();
 
             Intent intent = new Intent(this, PhoreWalletService.class);
             intent.setAction(ACTION_SCHEDULE_SERVICE);
