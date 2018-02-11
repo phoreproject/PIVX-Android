@@ -266,6 +266,7 @@ public class RestoreActivity extends BaseActivity {
                     }
                 });
                 simpleTextDialog.show(getFragmentManager(),getResources().getString(R.string.restore_dialog_tag));
+                phoreApplication.getAppConf().setHasBackup(true);
 
                 if (!jumpToWizard) {
                     new Handler().postDelayed(new Runnable() {
