@@ -121,6 +121,7 @@
                 android:textStyle="normal"
                 android:text="@string/change_pincode"/>
 
+            <!-- 
             <Button
                 android:id="@+id/btn_change_node"
                 android:background="@drawable/settings_items"
@@ -136,6 +137,7 @@
                 android:textSize="16sp"
                 android:textStyle="normal"
                 android:text="@string/settings_change_trusted_node"/>
+                -->
 
             <Button
                 android:id="@+id/btn_reset_blockchain"

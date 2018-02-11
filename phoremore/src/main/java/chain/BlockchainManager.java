@@ -243,11 +243,11 @@ public class BlockchainManager {
                 // Memory check
                 final int maxConnectedPeers = context.isMemoryLow() ? 4 : 6 ;
 
-                final String trustedPeerHost = conf.getTrustedNodeHost();
-                final boolean hasTrustedPeer = trustedPeerHost != null;
+                final String[] trustedPeerHosts = conf.getTrustedNodes();
+                final boolean hasTrustedPeer = trustedPeerHosts.length > 0;
 
                 final boolean connectTrustedPeerOnly = true;//hasTrustedPeer && config.getTrustedPeerOnly();
-                peerGroup.setMaxConnections(connectTrustedPeerOnly ? 1 : maxConnectedPeers);
+                peerGroup.setMaxConnections(maxConnectedPeers);
                 peerGroup.setConnectTimeoutMillis(conf.getPeerTimeoutMs());
                 peerGroup.setPeerDiscoveryTimeoutMillis(conf.getPeerDiscoveryTimeoutMs());
 
@@ -280,13 +280,13 @@ public class BlockchainManager {
                             boolean needsTrimPeersWorkaround = false;
 
                             if (hasTrustedPeer) {
-                                LOG.info("trusted peer '" + trustedPeerHost + "'" + (connectTrustedPeerOnly ? " only" : ""));
-                                final InetSocketAddress addr;
-                                addr = new InetSocketAddress(trustedPeerHost, conf.getNetworkParams().getPort());
-
-                                if (addr.getAddress() != null) {
-                                    peers.add(addr);
-                                    needsTrimPeersWorkaround = true;
+                                for (String host : trustedPeerHosts) {
+                                    LOG.info("trusted peer '" + host + "'" + (connectTrustedPeerOnly ? " only" : ""));
+                                    InetSocketAddress addr = new InetSocketAddress(host, conf.getNetworkParams().getPort());
+                                    if (addr.getAddress() != null) {
+                                        peers.add(addr);
+                                        needsTrimPeersWorkaround = true;
+                                    }
                                 }
                             }
 

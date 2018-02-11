@@ -63,15 +63,6 @@ public class PincodeActivity extends BaseActivity implements KeyboardFragment.on
     }
 
     private void goNext() {
-        if (phoreApplication.getAppConf().getTrustedNode() == null){
-            List<PhorePeerData> nodes = PhoreGlobalData.listTrustedHosts();
-            if (nodes.size() > 0) {
-                Random random = new Random();
-                phoreApplication.setTrustedServer(nodes.get(random.nextInt(nodes.size())));
-                phoreApplication.stopBlockchain();
-            }
-        }
-
         phoreApplication.getAppConf().setAppInit(true);
 
         Intent intent = new Intent(this, MnemonicActivity.class);

@@ -23,7 +23,9 @@ import chain.BlockchainState;
 import io.phore.android.BuildConfig;
 import io.phore.android.R;
 import io.phore.android.ui.contacts_activity.ContactsActivity;
+import io.phore.android.ui.qr_activity.QrActivity;
 import io.phore.android.ui.settings_activity.SettingsActivity;
+import io.phore.android.ui.transaction_send_activity.SendActivity;
 import io.phore.android.ui.wallet_activity.WalletActivity;
 
 import static io.phore.android.module.PhoreContext.OUT_OF_SYNC_TIME;
@@ -201,6 +203,10 @@ public class BaseDrawerActivity extends PhoreActivity implements NavigationView.
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             finish();
+        } else if (id == R.id.nav_send) {
+            startActivity(new Intent(this, SendActivity.class));
+        } else if (id == R.id.nav_receive) {
+            startActivity(new Intent(this, QrActivity.class));
         } else if (id == R.id.nav_address) {
             startActivity(new Intent(this, ContactsActivity.class));
         } else if (id == R.id.nav_settings) {

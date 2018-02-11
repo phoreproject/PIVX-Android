@@ -379,5 +379,7 @@
     <string name="my_address">My Address</string>
     <string name="wallet">Wallet</string>
     <string name="wallet_phr">PHR</string>
+    <string name="drawer_send">Send</string>
+    <string name="drawer_receive">Receive</string>
 
 </resources>

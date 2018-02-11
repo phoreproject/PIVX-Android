@@ -53,7 +53,7 @@ public class SettingsActivity extends BaseDrawerActivity implements View.OnClick
     private Button btn_export_pub_key;
     private Button btn_import_xpub;
     private Button buttonChange;
-    private Button btn_change_node;
+    // private Button btn_change_node;
     private Button btn_reset_blockchain;
     private Button btn_report;
     private Button btn_support;
@@ -91,8 +91,8 @@ public class SettingsActivity extends BaseDrawerActivity implements View.OnClick
         buttonChange = (Button) findViewById(R.id.btn_change_pincode);
         buttonChange.setOnClickListener(this);
 
-        btn_change_node = (Button) findViewById(R.id.btn_change_node);
-        btn_change_node.setOnClickListener(this);
+        // btn_change_node = (Button) findViewById(R.id.btn_change_node);
+        // btn_change_node.setOnClickListener(this);
 
         btn_reset_blockchain = (Button) findViewById(R.id.btn_reset_blockchain);
         btn_reset_blockchain.setOnClickListener(this);
@@ -143,8 +143,8 @@ public class SettingsActivity extends BaseDrawerActivity implements View.OnClick
             startActivity(myIntent);
         }else if (id == R.id.btn_network){
             startActivity(new Intent(v.getContext(),SettingsNetworkActivity.class));
-        }else if(id == R.id.btn_change_node) {
-            startActivity(new Intent(v.getContext(), StartNodeActivity.class));
+        // }else if(id == R.id.btn_change_node) {
+        //     startActivity(new Intent(v.getContext(), StartNodeActivity.class));
         }else if(id == R.id.btn_reset_blockchain){
             launchResetBlockchainDialog();
         }else if (id == R.id.btn_report){
