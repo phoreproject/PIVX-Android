@@ -167,4 +167,5 @@ public interface PhoreModule {
 
     List<PhoreRate> listRates();
 
+    List<String> getAvailableMnemonicWordsList();
 }

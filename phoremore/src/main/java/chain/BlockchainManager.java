@@ -39,7 +39,9 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import global.ContextWrapper;
+import global.PhoreGlobalData;
 import global.WalletConfiguration;
+import phoremore.PhorePeerData;
 import wallet.WalletManager;
 
 public class BlockchainManager {
@@ -289,6 +291,10 @@ public class BlockchainManager {
                                         peers.add(addr);
                                         needsTrimPeersWorkaround = true;
                                     }
+                                }
+                            }else {
+                                for (PhorePeerData phorePeerData : PhoreGlobalData.listTrustedHosts()) {
+                                    peers.add(new InetSocketAddress(phorePeerData.getHost(), phorePeerData.getTcpPort()));
                                 }
                             }
 

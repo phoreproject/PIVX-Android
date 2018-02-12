@@ -609,6 +609,11 @@ public class PhoreModuleImp implements PhoreModule {
         return rateDb.list();
     }
 
+    @Override
+    public List<String> getAvailableMnemonicWordsList() {
+        return walletManager.getAvailableMnemonicWordsList();
+    }
+
 
     public void saveRate(PhoreRate phoreRate){
         rateDb.insertOrUpdateIfExist(phoreRate);
