@@ -7,8 +7,7 @@ Welcome to the Phore Wallet for android! Its a work in progress forked from [piv
 This project contains several sub-projects:
 
 - app: The Android app itself. This is probably what you're searching for.
-- pivtrumj: Stratum protocol implementation.
-- pivx-core-0.14.3-12.1: pivxj.
+- phoremore: Mix of unused stratum protocol and some wallet code.
 
 You can build all sub-projects at once using Gradle:
 
