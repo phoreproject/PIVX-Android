@@ -68,7 +68,7 @@
     <string name="confirm">Confirm</string>
     <string name="action_scan">scanner</string>
     <string name="btn_select_node">Add node</string>
-
+    <string name="node_default">Default values</string>
     <string name="title_no_trusted_peer_connection">Network issue</string>
     <string name="message_no_trusted_peer_connection">Unable to connect to Phore network.</string>
     <string name="share_address_text">Share address</string>
