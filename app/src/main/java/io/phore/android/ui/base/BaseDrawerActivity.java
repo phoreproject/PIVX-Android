@@ -12,12 +12,14 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import chain.BlockchainState;
 import io.phore.android.BuildConfig;
@@ -133,11 +135,8 @@ public class BaseDrawerActivity extends PhoreActivity implements NavigationView.
     @Override
     protected void onResume() {
         super.onResume();
-
         checkState();
-
         updateBlockchainState();
-
     }
 
     @Override
@@ -204,7 +203,11 @@ public class BaseDrawerActivity extends PhoreActivity implements NavigationView.
             startActivity(intent);
             finish();
         } else if (id == R.id.nav_send) {
-            startActivity(new Intent(this, SendActivity.class));
+            if (phoreModule.isWalletWatchOnly()) {
+                Toast.makeText(this, R.string.error_watch_only_mode, Toast.LENGTH_SHORT).show();
+            } else {
+                startActivity(new Intent(this, SendActivity.class));
+            }
         } else if (id == R.id.nav_receive) {
             startActivity(new Intent(this, QrActivity.class));
         } else if (id == R.id.nav_address) {
