@@ -19,6 +19,7 @@ import io.phore.android.ui.base.BaseRecyclerFragment;
 import io.phore.android.ui.base.tools.adapter.BaseRecyclerAdapter;
 import io.phore.android.ui.base.tools.adapter.BaseRecyclerViewHolder;
 import io.phore.android.ui.base.tools.adapter.ListItemListeners;
+import io.phore.android.ui.settings_activity.SettingsActivity;
 import io.phore.android.ui.settings_network_activity.NetworkViewHolder;
 
 /**
