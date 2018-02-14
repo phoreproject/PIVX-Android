@@ -225,6 +225,9 @@ public class BaseDrawerActivity extends PhoreActivity implements NavigationView.
     }
 
     private void updateBlockchainState() {
+        // Check if the activity is on foreground
+        if (!isOnForeground)return;
+
         if (txt_sync_status!=null) {
             String text = null;
             int color = 0;
