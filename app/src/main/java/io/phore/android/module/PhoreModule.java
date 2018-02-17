@@ -69,6 +69,8 @@ public interface PhoreModule {
      */
     Address getReceiveAddress();
 
+    Address getFreshNewAddress();
+
     boolean isAddressUsed(Address address);
 
     long getAvailableBalance();
@@ -168,4 +170,5 @@ public interface PhoreModule {
     List<PhoreRate> listRates();
 
     List<String> getAvailableMnemonicWordsList();
+
 }
