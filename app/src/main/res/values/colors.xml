@@ -10,7 +10,8 @@
     <color name="bgGreen">#00D188</color>
     <color name="green">#009688</color>
     <color name="lightGreen1">#36c6a5</color>
-    <color name="mainGreen">#B7FFF9</color>
+    <color name="mainGreen">#63ece0</color>
+    <color name="sync_green">#B7FFF9</color>
     <color name="lightGreen">#50e3c2</color>
     <color name="colorPurple">#55476c</color>
     <color name="bgGrey">#37404d</color>

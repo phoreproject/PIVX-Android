@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import chain.BlockchainState;
 import io.phore.android.R;
 import io.phore.android.module.NoPeerConnectedException;
 import io.phore.android.rate.db.PhoreRate;
@@ -72,6 +73,7 @@ public class WalletActivity extends BaseDrawerActivity {
     private TextView txt_local_currency;
     private TextView txt_watch_only;
     private View view_background;
+    private View container_syncing;
     private PhoreRate phoreRate;
     private TransactionsFragmentBase txsFragment;
 
@@ -120,6 +122,7 @@ public class WalletActivity extends BaseDrawerActivity {
         txt_local_currency = (TextView) containerHeader.findViewById(R.id.txt_local_currency);
         txt_watch_only = (TextView) containerHeader.findViewById(R.id.txt_watch_only);
         view_background = root.findViewById(R.id.view_background);
+        container_syncing = root.findViewById(R.id.container_syncing);
         // Open Send
         root.findViewById(R.id.fab_add).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -352,6 +355,17 @@ public class WalletActivity extends BaseDrawerActivity {
             } else {
                 txt_local_currency.setText("");
             }
+        }
+    }
+
+    @Override
+    protected void onBlockchainStateChange(){
+        if (blockchainState == BlockchainState.SYNCING){
+            AnimationUtils.fadeInView(container_syncing,500);
+        }else if (blockchainState == BlockchainState.SYNC){
+            AnimationUtils.fadeOutGoneView(container_syncing,500);
+        }else if (blockchainState == BlockchainState.NOT_CONNECTION){
+            AnimationUtils.fadeInView(container_syncing,500);
         }
     }
 }

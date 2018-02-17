@@ -48,7 +48,7 @@ public class BaseDrawerActivity extends PhoreActivity implements NavigationView.
     private TextView txt_sync_status;
     private ImageView img_sync;
 
-    private BlockchainState blockchainState = BlockchainState.SYNCING;
+    protected BlockchainState blockchainState = BlockchainState.SYNCING;
 
     private BroadcastReceiver walletServiceReceiver = new BroadcastReceiver() {
         @Override
@@ -56,12 +56,12 @@ public class BaseDrawerActivity extends PhoreActivity implements NavigationView.
             if (intent.hasExtra(INTENT_BROADCAST_DATA_TYPE)){
                 if (intent.getStringExtra(INTENT_BROADCAST_DATA_TYPE).equals(INTENT_BROADCAST_DATA_BLOCKCHAIN_STATE)) {
                     BlockchainState blockchainStateNew = (BlockchainState) intent.getSerializableExtra(INTENT_EXTRA_BLOCKCHAIN_STATE);
-                    onBlockchainStateChange();
                     if (blockchainStateNew == null) {
                         Log.e("APP", "blockchain state null..");
                         return;
                     }
                     blockchainState = blockchainStateNew;
+                    onBlockchainStateChange();
                     updateBlockchainState();
                 }else if(intent.getStringExtra(INTENT_BROADCAST_DATA_TYPE).equals(INTENT_BROADCAST_DATA_PEER_CONNECTED)){
                     checkState();
@@ -260,7 +260,7 @@ public class BaseDrawerActivity extends PhoreActivity implements NavigationView.
         }
     }
 
-    private double calculateBlockchainSyncProgress() {
+    protected double calculateBlockchainSyncProgress() {
         long nodeHeight = phoreModule.getConnectedPeerHeight();
         if (nodeHeight>0){
             // calculate the progress
