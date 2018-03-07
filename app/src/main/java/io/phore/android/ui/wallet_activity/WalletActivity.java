@@ -294,7 +294,11 @@ public class WalletActivity extends BaseDrawerActivity {
                     + " "+phoreRate.getCode()
             );
         }else {
-            txt_local_currency.setText("0 " + phoreRate.getCode());
+            if (phoreRate != null) {
+                txt_local_currency.setText("0 " + phoreRate.getCode());
+            } else {
+                txt_local_currency.setText("");
+            }
         }
     }
 }
