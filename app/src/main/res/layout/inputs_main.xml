@@ -26,7 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/txt_amount"
-            android:text="3.13 PIV"/>
+            android:text="3.13 PHR"/>
     </LinearLayout>
 
     <TextView
@@ -45,7 +45,7 @@
     <fragment
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:name="pivx.org.pivxwallet.ui.transaction_send_activity.custom.inputs.InputsFragment"
+        android:name="io.phore.android.ui.transaction_send_activity.custom.inputs.InputsFragment"
         android:id="@+id/inputs_fragment"
         />
 

@@ -7,7 +7,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@color/bgWhite"
-    tools:context="pivx.org.pivxwallet.ui.base.BaseDrawerActivity">
+    tools:context="io.phore.android.ui.base.BaseDrawerActivity">
 
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -28,7 +28,7 @@
             <fragment
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:name="pivx.org.pivxwallet.ui.wallet_activity.TransactionsFragmentBase"
+                android:name="io.phore.android.ui.wallet_activity.TransactionsFragmentBase"
                 android:id="@+id/transactions_fragment"
                 android:paddingBottom="66dp"
                 />

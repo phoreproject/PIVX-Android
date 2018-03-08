@@ -7,7 +7,7 @@
     <fragment
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:name="pivx.org.pivxwallet.ui.transaction_detail_activity.FragmentTxDetail"
+        android:name="io.phore.android.ui.transaction_detail_activity.FragmentTxDetail"
         android:id="@+id/fragment_tx_detail"
         />
 

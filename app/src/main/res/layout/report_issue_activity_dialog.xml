@@ -117,7 +117,7 @@
             android:id="@+id/txt_send"
             android:textSize="20sp"
             android:gravity="center"
-            android:textColor="@color/bgPurple"
+            android:textColor="@color/bgGreen"
             android:textStyle="bold"
             android:layout_weight="1"
             android:text="@string/btn_send"/>

@@ -1,18 +1,16 @@
-# PIVX-Wallet
+![phore logo](https://phore.io/wp-content/uploads/2018/01/phore-logo-new-transparant-black-website.png)
 
-![alt text](https://github.com/PIVX-Project/PIVX-Android/blob/master/banner/Feature%20Image.jpg)
+# Phore Android Wallet
 
-Welcome to the PIVX mobile wallet for android!
-
+Welcome to the Phore Wallet for android! Its a work in progress forked from [pivx](pivx-android).
 
 This project contains several sub-projects:
 
-app: The Android app itself. This is probably what you're searching for.
-
-pivtrumj: Stratum protocol implementation.
-
-pivx-core-0.14.3-12.1: pivxj.
+- app: The Android app itself. This is probably what you're searching for.
+- phoremore: Mix of unused stratum protocol and some wallet code.
 
 You can build all sub-projects at once using Gradle:
 
-gradle clean build
+    gradle clean build
+
+[pivx-android]: git@github.com:teneighty/phore-android.git

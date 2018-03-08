@@ -10,7 +10,7 @@
     <fragment
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:name="pivx.org.pivxwallet.ui.transaction_send_activity.custom.CustomFeeFragment"
+        android:name="io.phore.android.ui.transaction_send_activity.custom.CustomFeeFragment"
         android:id="@+id/fragment_custom_fee"
         />
 

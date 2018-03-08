@@ -11,7 +11,7 @@
     <fragment
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:name="pivx.org.pivxwallet.ui.settings_network_activity.NetworkFragment"
+        android:name="io.phore.android.ui.settings_network_activity.NetworkFragment"
         android:id="@+id/peers_fragment"
         />
 

@@ -2,7 +2,7 @@
 
     <string-array name="planets_array">
         <item>Mercury</item>
-        <item>Venus</item>
+.        <item>Venus</item>
         <item>Earth</item>
         <item>Mars</item>
         <item>Jupiter</item>
@@ -10,7 +10,7 @@
         <item>Uranus</item>
         <item>Neptune</item>
     </string-array>
-    <string name="app_name">PIVX wallet</string>
+    <string name="app_name">Phore wallet</string>
     <string name="btn_create_wallet">Create Wallet</string>
     <string name="btn_restore_wallet">Restore Wallet</string>
     <string name="restore_wallet_message">Select a backup of the wallet\nfrom a storage unit</string>
@@ -23,7 +23,7 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="set_amount">Write amount to send</string>
-    <string name="set_amount_piv">PIV</string>
+    <string name="set_amount_phr">PHR</string>
     <string name="set_amount_usd">USD</string>
     <string name="add_all">ADD ALL</string>
     <string name="title_amount">Amount</string>
@@ -39,8 +39,8 @@
     <string name="btn_send">Send</string>
     <string name="btn_request">Request</string>
     <string name="settings_subtitle_security">Security</string>
-    <string name="backup_wallet_message">Your backup will be encrypted with\nthe password you choose and saved\nto an external storage drive.</string>
     <string name="settings_subtitle_preference">Preference</string>
+    <string name="backup_wallet_message">Your backup will be encrypted with\nthe password you choose and saved\nto an external storage drive.</string>
     <string name="settings_subtitle_about">About</string>
     <string name="restore_wallet">Restore wallet</string>
     <string name="backup_wallet">Backup wallet</string>
@@ -69,8 +69,8 @@
     <string name="action_scan">scanner</string>
     <string name="btn_select_node">Add node</string>
 
-    <string name="title_no_trusted_peer_connection">Peer issue</string>
-    <string name="message_no_trusted_peer_connection">Trusted peer connection fail</string>
+    <string name="title_no_trusted_peer_connection">Network issue</string>
+    <string name="message_no_trusted_peer_connection">Unable to connect to Phore network.</string>
     <string name="share_address_text">Share address</string>
     <string name="error_sending_coins">Send coins fail</string>
 
@@ -100,13 +100,13 @@
     <string name="currency_message">Select your the local currency \n of your choice</string>
     <string name="title_fee">Fee</string>
     <string name="title_currency">Local Currency</string>
-    <string name="title_pivx_send">Amount send</string>
+    <string name="title_send">Amount send</string>
     <string name="empty_message_address">You don\'t have any saved address yet.</string>
     <string name="error_message">There seems to been an error\nwith your transaction</string>
     <string name="settings_change_trusted_node">Change trusted node</string>
     <string name="settings_reset_blockchain">Reset blockchain</string>
     <string name="save">Save</string>
-    <string name="tutorial_message"> Private, Instant, Verified, Transaction\nis a privacy-focused, decentralized, open source cryptocurrency run by a global community comprised of creators, innovators, and technology enthusiasts.</string>
+    <string name="tutorial_message"> Secure, Private and Instant.</string>
     <!-- Tutorial -->
     <string name="next_words">Next 8 words</string>
     <string name="next">Next</string>
@@ -114,12 +114,12 @@
     <string name="back">Back</string>
     <string name="restore">Restore</string>
     <string name="start">Start</string>
-    <string name="title_slide1">Pivx is secure</string>
+    <string name="title_slide1">Phore is secure</string>
     <string name="desc_slide1">First coin with BIP38 Encryption and Decryption of Private Keys</string>
     <string name="title_slide2">60 SECOND BLOCK TIME</string>
-    <string name="desc_slide2">Already very fast, PIVX transactions using SwiftX are instant with ZERO confirmation wait time required.</string>
+    <string name="desc_slide2">Already very fast, Phore transactions using SwiftX are instant with ZERO confirmation wait time required.</string>
     <string name="title_slide3">Extremely secure and private</string>
-    <string name="desc_slide3">PIVX is aiming it’s sights on establishing the first truly anonymous crypto-currency.</string>
+    <string name="desc_slide3">Phore is aiming it’s sights on establishing the first truly anonymous crypto-currency.</string>
     <string name="title_slide4">Trusted nodes federation</string>
     <string name="desc_slide4">Trusted nodes federation make light PoS wallets possible, you can rely on them or create your own trusted node!</string>
     <string name="option_add_node">Add node</string>
@@ -140,7 +140,7 @@
     <string name="restore_dialog_tag">restore dialog tag</string>
     <string name="restore_dialog_error">restore dialog error</string>
     <string name="settings_support">Support</string>
-    <string name="support_subject">PIVX wallet support</string>
+    <string name="support_subject">Phore wallet support</string>
     <string name="tutorial">Tutorial</string>
     <string name="copy">Copy</string>
     <string name="share">Share</string>
@@ -198,13 +198,13 @@
     <string name="per_kilobyte">Per kilobyte</string>
     <string name="total_at_least">Total at least</string>
     <string name="fee">Fee</string>
-    <string name="minimum_fee">Pay only the minimum fee of 0.00010000 Piv/kB</string>
+    <string name="minimum_fee">Pay only the minimum fee of 0.00010000 PHR/kB</string>
     <string name="several_outputs_add_address">ADD ADDRESS</string>
     <string name="address_num">Address %d </string>
     <string name="invalid_last_amount">Invalid last address amount</string>
     <string name="inputs_explanation">Select coins to consume in the transaction</string>
     <string name="bad_address">Bad address</string>
-    <string name="invalid_amount_value">Invalid amount value</string>
+    <string name="invalid_amount_value">Invalid amount rate</string>
     <string name="select_all">Select all</string>
     <string name="total_amount">Total:</string>
     <string name="send_amount_input_error">You must set an amount to add custom inputs.</string>
@@ -223,8 +223,8 @@
     <string name="not_connection">No connection</string>
     <string name="confimations">Confirmations</string>
     <string name="multiple_address_send">Sending to %d addresses</string>
-    <string name="fee_per_kb">%s Piv/kB</string>
-    <string name="fee_explanation">If the custom fee is lower than the minimum fee (0.0001 PIV/kB) the cost will be the minimum and not the custom fee selected.\n Fee calculated per kilobyte.</string>
+    <string name="fee_per_kb">%s PHR/kB</string>
+    <string name="fee_explanation">If the custom fee is lower than the minimum fee (0.0001 PHR/kB) the cost will be the minimum and not the custom fee selected.\n Fee calculated per kilobyte.</string>
     <string name="invalid_fee_amount">Invalid fee amount</string>
     <string name="load_inputs_fail">Coin control fail</string>
     <string name="title_tx_weight">Weight</string>
@@ -238,7 +238,7 @@
     <string name="options_menu">Options Menu</string>
     <string name="delete_address_label_text">Label for address\n%s\nis going to be deleted.\n\nAre you sure?</string>
     <string name="address_label_deleted">Address label deleted.</string>
-    <string name="no_available_inputs">You don\'t have any coin to spend</string>
+    <string name="no_available_inputs">You don\'t have any code to spend</string>
     <string name="restore_mnemonic_screen_title">Restore Mnemonic</string>
     <string name="invalid_mnemonic_code">Invalid mnemonic code, please check every word again.</string>
     <string name="restore_mnemonic">Restoring wallet from mnemonic..</string>
@@ -248,7 +248,7 @@
     <string name="validate_multi_send_enabled">Blocked action, multi send enabled</string>
     <string name="detail_no_available_inputs">No available inputs information</string>
     <string name="report_crash_title">Report crash</string>
-    <string name="crash_toast_text">Pivx wallet crash</string>
+    <string name="crash_toast_text">Phore wallet crash</string>
     <string name="backup_fail">Backup fail</string>
     <string name="no_peer_connection">No connection to the node</string>
     <string name="wallet_is_not_sync">Wallet is not sync, to be sure about your real balance please wait until the synchronization finish</string>
@@ -275,7 +275,7 @@
     <!-- Sweep wallet -->
     <!-- Sweep paper wallet means to redeem coins from a code usually printed on a paper -->
     <string name="title_activity_sweep_wallet">Sweep paper wallet</string>
-    <string name="sweep_wallet_info">You are about to transfer coins from a paper wallet to your PIVX wallet.\nAfter the transfer is complete, please avoid reusing the paper wallet for security reasons.\n\nSupported formats: WIF, BIP38, Mini private key.</string>
+    <string name="sweep_wallet_info">You are about to transfer coins from a paper wallet to your Phore wallet.\nAfter the transfer is complete, please avoid reusing the paper wallet for security reasons.\n\nSupported formats: WIF, BIP38, Mini private key.</string>
     <string name="sweep_wallet_key_title">Private key</string>
     <string name="sweep_wallet_key_password">Private key password</string>
     <string name="sweep_wallet_key_hint">type or scan a private key</string>
@@ -294,8 +294,8 @@
     <string name="title_activity_transaction_fees">Transaction fees</string>
     <!-- Example: Bitcoin transaction fees-->
     <string name="tx_fees_title">%1$s transaction fees</string>
-    <!-- Example: The fee value is per kilobyte.-->
-    <string name="tx_fees_description">The fee value is %1$s.</string>
+    <!-- Example: The ratealue is per kilobyte.-->
+    <string name="tx_fees_description">The fee rate is %1$s.</string>
     <string name="tx_fees_per_kilobyte">per kilobyte of transaction data</string>
     <string name="tx_fees_per_byte">per byte of transaction data</string>
     <string name="tx_fees_per_transaction">per transaction</string>
@@ -306,11 +306,11 @@
     <string name="terms_of_service" translatable="false">LEGAL DISCLAIMER\n
     \n
     \n
-    1. Risks related to the use of PIVX Wallet\n
+    1. Risks related to the use of Phore Wallet\n
     \n
-    Furszy and/or PIVX will not be responsible for any losses, damages or claims arising from events falling within the scope of the following five categories:\n
+    Phore will not be responsible for any losses, damages or claims arising from events falling within the scope of the following five categories:\n
     \n
-    (1) Mistakes made by the user of any cryptocurrency-related software or service, e.g., forgotten passwords, payments sent to wrong coin addresses, and accidental deletion of wallets.\n
+    (1) Mistakes made by the user of any cryptocurrency-related software or service, e.g., forgotten passwords, payments sent to wrong code addresses, and accidental deletion of wallets.\n
     \n
     (2) Software problems of the wallet and/or any cryptocurrency-related software or service, e.g., corrupted wallet file, incorrectly constructed transactions, unsafe cryptographic libraries, malware affecting the wallet and/or any cryptocurrency-related software or service.\n
     \n
@@ -366,9 +366,9 @@
     <string name="upgrade_wallet">Upgrade Wallet</string>
     <string name="upgrade_succesfull">Upgrade was successful!, please wait some time before the wallet is sync again</string>
     <string name="write_external_denied">Permission denied to write in the external storage</string>
-    <string name="message_connection_is_needed">Peer connection is needed to execute this task, please check if your internet is active or if you are using a trusted node check if it is online.</string>
+    <string name="message_connection_is_needed">Peer connection is needed to execute this task, please check if your internet is active.</string>
     <string name="no_rate">No rate</string>
-    <string name="change_address_explain">You can customize the change address of your transaction specifing it or checking the box below and sending the amount to the origin (if there is more than one origin the wallet will chose the address with the highest value).</string>
+    <string name="change_address_explain">You can customize the change address of your transaction specifing it or checking the box below and sending the amount to the origin (if there is more than one origin the wallet will chose the address with the highest rate).</string>
     <string name="change_address_origin">Send it to origin.</string>
     <string name="clean">Clean</string>
     <string name="origin_address">Origin address</string>
@@ -378,5 +378,13 @@
     <string name="option_coin_selection">Coin selection</string>
     <string name="change_address_remember">Remember selection</string>
     <string name="my_address">My Address</string>
+    <string name="wallet">Wallet</string>
+    <string name="wallet_phr">PHR</string>
+    <string name="drawer_send">Send</string>
+    <string name="drawer_receive">Receive</string>
+    <string name="notification_receive_title">PHRs received!</string>
+    <string name="notification_receive_message">Coins received for a value of %1$s!</string>
+    <string name="settings_rates">Currency Rate</string>
+    <string name="rate_selected">Rate selected</string>
 
 </resources>

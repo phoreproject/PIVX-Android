@@ -47,7 +47,7 @@
                 android:maxWidth="180dp"
                 tools:text="DAE9XiuuCYgbGC2aTEZT8jnGStv3eWrWDw"
                 android:hint="Error"
-                android:textColor="@color/bgPurple"
+                android:textColor="@color/bgGreen"
                 android:textSize="16sp" />
 
             <TextView
@@ -89,7 +89,7 @@
                 android:layout_gravity="end"
                 android:gravity="end"
                 android:layout_height="wrap_content"
-                android:text="0.00203 PIV"
+                android:text="0.00203 PHR"
                 android:textColor="#404040"
                 android:textSize="18sp" />
 

@@ -33,7 +33,7 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/valuePivx"
+        android:id="@+id/valuePhore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

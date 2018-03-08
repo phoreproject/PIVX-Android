@@ -11,7 +11,7 @@
 
         <fragment
             android:id="@+id/fragment_tx_detail"
-            android:name="pivx.org.pivxwallet.ui.transaction_detail_activity.FragmentTxDetail"
+            android:name="io.phore.android.ui.transaction_detail_activity.FragmentTxDetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -27,7 +27,7 @@
             android:maxHeight="40dp"
             android:padding="7dp"
             android:text="@string/confirm"
-            android:textColor="@color/bgPurple" />
+            android:textColor="@color/bgGreen" />
 
 
     </RelativeLayout>

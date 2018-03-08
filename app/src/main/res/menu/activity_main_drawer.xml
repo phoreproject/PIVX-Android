@@ -7,17 +7,22 @@
             android:icon="@mipmap/ic_wallet"
             android:title="@string/my_wallet" />
         <item
-            android:id="@+id/nav_address"
-            android:icon="@mipmap/ic_address"
-            android:title="@string/address_book_screen_title" />
+            android:id="@+id/nav_send"
+            android:icon="@mipmap/ic_transaction_send"
+            android:title="@string/drawer_send" />
+
+        <item
+            android:id="@+id/nav_receive"
+            android:icon="@mipmap/ic_transaction_receive"
+            android:title="@string/drawer_receive" />
         <item
             android:id="@+id/nav_settings"
             android:icon="@mipmap/ic_settings"
             android:title="@string/settings_screen_title" />
         <item
-            android:id="@+id/nav_donations"
-            android:icon="@drawable/ic_donations"
-            android:title="@string/donations" />
+            android:id="@+id/nav_address"
+            android:icon="@mipmap/ic_address"
+            android:title="@string/address_book_screen_title" />
     </group>
 
 
