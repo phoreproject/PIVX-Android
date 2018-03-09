@@ -2,12 +2,12 @@
 <resources>
     <color name="transparent">#00000000</color>
     <!-- Phore Green -->
-    <color name="colorPrimary">#00CD8D</color>
+    <color name="colorPrimary">#00D188</color>
     <color name="colorPrimaryDark">#007F59</color>
     <color name="colorAccent">#53DAB1</color>
 
     <!-- Phore Background Green -->
-    <color name="bgGreen">#00CD8D</color>
+    <color name="bgGreen">#00D188</color>
     <color name="green">#009688</color>
     <color name="mainGreen">#B7FFF9</color>
     <color name="lightGreen">#50e3c2</color>
