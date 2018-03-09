@@ -13,4 +13,4 @@ You can build all sub-projects at once using Gradle:
 
     gradle clean build
 
-[pivx-android]: git@github.com:teneighty/phore-android.git
+[phore-android]: git@github.com:teneighty/phore-android.git
