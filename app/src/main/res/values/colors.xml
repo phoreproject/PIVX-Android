@@ -13,6 +13,7 @@
     <color name="lightGreen">#50e3c2</color>
     <color name="colorPurple">#55476c</color>
     <color name="bgGrey">#37404d</color>
+    <color name="bgGreyTint">#4b535e</color>
     <color name="bgWhite">#ffffff</color>
     <color name="bgWhite30">#4Dffffff</color>
     <color name="bgBlack30">#4D000000</color>
