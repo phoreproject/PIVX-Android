@@ -1,0 +1,390 @@
+<resources>
+
+    <string-array name="planets_array">
+        <item>水星</item>
+.        <item>金星</item>
+        <item>地球</item>
+        <item>火星</item>
+        <item>木星</item>
+        <item>土星</item>
+        <item>天王星</item>
+        <item>海王星</item>
+    </string-array>
+    <string name="app_name">Phore ウォレット</string>
+    <string name="btn_create_wallet">ウォレットを作る</string>
+    <string name="btn_restore_wallet">ウォレットを復元する</string>
+    <string name="restore_wallet_message">ストレージからバックアップした\nウォレットを選択する</string>
+    <string name="pincode_message">セキュリティのために \na ピンコードは必要です</string>
+    <string name="select_file">ファイルを選択</string>
+    <string name="action_qr">QR コード</string>
+    <string name="action_add">連絡先の追加</string>
+    <string name="string_password">パスワード</string>
+    <string name="appbar_scrolling_view_behavior">スクロール?</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="set_amount">送金量を記入</string>
+    <string name="set_amount_phr">PHR</string>
+    <string name="set_amount_usd">USD</string>
+    <string name="add_all">すべて追加</string>
+    <string name="title_amount">量</string>
+    <string name="title_address">アドレス</string>
+    <string name="title_name">名前</string>
+    <string name="title_description">説明</string>
+    <string name="title_receiver_name">受信者名</string>
+    <string name="title_date">日付</string>
+    <string name="set_address">アドレスかラベル名を入力</string>
+    <string name="add_address">アドレスかラベル名を入力</string>
+    <string name="set_name">名前を追加</string>
+    <string name="set_description">説明を追加</string>
+    <string name="btn_send">送信</string>
+    <string name="btn_request">リクエスト</string>
+    <string name="settings_subtitle_security">セキュリティ</string>
+    <string name="settings_subtitle_preference">優先度</string>
+    <string name="backup_wallet_message">バックアップは暗号化され\n外部ストレージに保存されます。</string>
+    <string name="settings_subtitle_about">中断</string>
+    <string name="restore_wallet">ウォレットの復元</string>
+    <string name="backup_wallet">ウォレットのバックアップ</string>
+    <string name="change_pincode">PINコードの変更</string>
+    <string name="local_currency">地域通貨</string>
+    <string name="local_currency_usd">USD</string>
+    <string name="repeat_password">パスワードを再度入力</string>
+    <string name="add_name">名前を追加</string>
+
+    <string name="scan_camera_problem_dialog_title">すみません</string>
+    <string name="scan_camera_problem_dialog_message">カメラに問題があります。再起動する必要があるかもしれません。</string>
+    <string name="scan_camera_permission_dialog_title">カメラの権限</string>
+    <string name="scan_camera_permission_dialog_message">QRコードを読み込むために、カメラの使用の権限を与える必要があります。</string>
+    <string name="scan_result_title">スキャン結果</string>
+    <string name="scan_result_address_title">アドレス検出</string>
+    <string name="node_selection_message">利用できるノードを選択するか、追加できます</string>
+    <string name="select_node">ノードの選択</string>
+
+    <string name="select">ノードの選択</string>
+    <string name="text_version">バージョン</string>
+    <string name="network_monitor">ネットワークモニター</string>
+    <string name="settings_report">問題を報告</string>
+    <string name="send_message">トランザクションの詳細:</string>
+    <string name="save_message">アドレスを保存しますか？</string>
+    <string name="confirm">確認</string>
+    <string name="action_scan">スキャナ</string>
+    <string name="btn_select_node">ノードを追加</string>
+
+    <string name="title_no_trusted_peer_connection">ネットワークの問題</string>
+    <string name="message_no_trusted_peer_connection">Phore ネットワークに接続できません。</string>
+    <string name="share_address_text">アドレスをシェア</string>
+    <string name="error_sending_coins">送金に失敗</string>
+
+    <string name="ssl_port">SSLポート</string>
+    <string name="hint_ssl_port">デフォルトのSSLポート</string>
+    <string name="host">ホスト</string>
+    <string name="hint_host">ホストを追加</string>
+    <string name="tcp_port">TCPポート</string>
+    <string name="hint_tcp_port">デフォルトTCPポート</string>
+    <string name="add_memo">毎月の支払</string>
+    <string name="backup_create">バックアップの作成</string>
+    <string name="transaction_hash">トランザクションID</string>
+    <string name="explorer">エクスプローラ</string>
+    <string name="backup_passwords_doesnt_match">パスワードが一致しません。もう一度入力してください。</string>
+    <string name="backup_completed">バックアップ成功</string>
+    <string name="backup_completed_text">おめでとうございます。バックアップに成功しました。\n次のフォルダに保存されました。\n%s </string>
+    <string name="import_keys_dialog_message">次のフォルダ %s から読み込んだ\nバックアップデータを選択してください。</string>
+    <string name="backup_restore">復元</string>
+    <string name="import_export_keys_dialog_failure_title">ウォレットの復元に失敗</string>
+    <string name="import_keys_dialog_failure">バックアップデータのインポートに失敗\n%s</string>
+    <string name="button_dismiss">却下?</string>
+    <string name="button_retry">再試行</string>
+    <string name="restore_wallet_dialog_success">ウォレットを復元しました</string>
+    <string name="restore_wallet_dialog_success_replay">ウォレットの復元に成功しました。残高の取得は少し時間がかかることがあります。</string>
+    <string name="unavailable">利用できない枚数:</string>
+    <string name="sending_tx">トランザクション送信中..</string>
+    <string name="currency_message">地域通貨を選択してください</string>
+    <string name="title_fee">手数料</string>
+    <string name="title_currency">地域通貨</string>
+    <string name="title_send">送金量</string>
+    <string name="empty_message_address">保存したアドレスはありません。</string>
+    <string name="error_message">トランザクションにエラーが発生しました</string>
+    <string name="settings_change_trusted_node">信頼するノードの変更</string>
+    <string name="settings_reset_blockchain">ブロックチェーンのリセット</string>
+    <string name="save">保存</string>
+    <string name="tutorial_message"> FAST. SCALABLE. SECURE.</string>
+    <!-- Tutorial -->
+    <string name="next_words">次の8単語</string>
+    <string name="next">次へ</string>
+    <string name="skip">スキップ</string>
+    <string name="back">戻る</string>
+    <string name="restore">復元</string>
+    <string name="start">始める</string>
+    <string name="title_slide1">Phore はセキュア</string>
+    <string name="desc_slide1">BIP38 によるプライベートキーの暗号/復号化に対応</string>
+    <string name="title_slide2">60秒のブロック時間</string>
+    <string name="desc_slide2">ブロック時間も高速ですが、SwiftX を使うことで0確認で即時送金が可能です。</string>
+    <string name="title_slide3">非常にセキュアで匿名性を持つ</string>
+    <string name="desc_slide3">Phoreはエコシステムを持つ最初の匿名通貨を目指します。</string>
+    <string name="title_slide4">信頼できるノードの集合体</string>
+    <string name="desc_slide4">信頼できるノードによって高速なPoSウォレットが可能になり、自身でノードを作ることも出来ます。</string>
+    <string name="option_add_node">ノードの追加</string>
+    <string name="report_issue_dialog_description">問題の説明</string>
+    <string name="report_issue_dialog_collect_device_info">デバイス情報の追加</string>
+    <string name="report_issue_dialog_collect_application_log">アプリのログの追加</string>
+    <string name="report_issue_dialog_collect_wallet_dump">ウォレットダンプの追加</string>
+    <string name="report_issue_dialog_collect_installed_packages">インストール済みのパッケージリストの追加</string>
+    <string name="report_issue_dialog_collect_db_data">データベースデータの追加</string>
+    <string name="report_issue_dialog_report">報告</string>
+    <string name="button_cancel">キャンセル</string>
+    <string name="report_issue_dialog_mail_intent_chooser">レポートを送信</string>
+    <string name="report_issue_dialog_mail_intent_failed">レポートの送信に失敗</string>
+    <string name="report_issue_dialog_message_issue">問題を再現できるように正確に記述してください。</string>
+    <string name="report_issuea_dialog_title">問題の報告</string>
+    <string name="invalid_inputs">無効な入力</string>
+    <string name="send_error_dialog_tag">エラーダイアログタグを送信</string>
+    <string name="restore_dialog_tag">エラーダイアログタグを復元</string>
+    <string name="restore_dialog_error">ダイアログエラーを復元</string>
+    <string name="settings_support">サポート</string>
+    <string name="support_subject">Phore ウォレットサポート</string>
+    <string name="tutorial">チュートリアル</string>
+    <string name="copy">コピー</string>
+    <string name="share">シェア</string>
+    <string name="copy_message">アドレスをクリップボードにコピーしました</string>
+    <string name="security_message">ウォレットの復元に必要になるので、安全な場所に書きおいてください。\n\nこの単語をシェアしないでください。この単語があれば、誰でもコインを送金できるようになります。</string>
+    <string name="security_message_confirmation">次の画面で確認してください</string>
+    <string name="confirmation_message">セキュリティワードを確認</string>
+    <string name="order_message_confirmation">単語を正しい順番で選択</string>
+    <string name="backup_words">バックアップフレーズ</string>
+    <string name="btn_secure">コピー済み</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </string>
+    <string name="number_zero">0</string>
+    <string name="number_one">1</string>
+    <string name="number_two">2</string>
+    <string name="number_three">3</string>
+    <string name="number_four">4</string>
+    <string name="number_five">5</string>
+    <string name="number_six">6</string>
+    <string name="number_seven">7</string>
+    <string name="number_eight">8</string>
+    <string name="number_nine">9</string>
+    <string name="btn_clear">クリア</string>
+    <string name="btn_backspace">戻る</string>
+    <string name="pincode_saved">新しいPINを保存</string>
+    <string name="insert_old_pin">PIN</string>
+    <string name="insert_new_pin">現在のPINを入力</string>
+    <string name="invalid_pincode">PINが間違っています</string>
+    <string name="contact_already_exist">そのアドレスは既に存在しています</string>
+    <string name="invalid_input_address">アドレスが間違っています</string>
+    <string name="reminder_backup">バックアップリマインダー</string>
+    <string name="reminder_backup_body">バックアップは非常に重要です。今行いますか？</string>
+    <string name="button_ok">はい</string>
+    <string name="backup_succed_dialog">バックアップ_成功</string>
+    <string name="error_no_connectivity_title">接続無し</string>
+    <string name="error_no_connectivity_body">接続が復旧するまでのトランザクションを保存します。\n続行しますか？</string>
+    <string name="cannot_restore_wallet">ウォレットを復元できません。\nパスワードを確認してください</string>
+    <string name="dialog_reset_blockchain_title">ブロックチェーンをリセット</string>
+    <string name="dialog_reset_blockchain_body">ブロックチェーンデータはリセットされます。\n同期には時間がかかります。\n\n続行しますか？</string>
+    <string name="reseting_blockchain">ブロックチェーンのリセット中...</string>
+    <string name="donations">寄付</string>
+    <string name="donation_message">寄付はアプリのメンテナンス, 開発に充てられます\nご協力に感謝します。</string>
+    <string name="donation_title">寄付を行います</string>
+    <string name="btn_donate">寄付</string>
+    <string name="donation_thanks">寄付を送金中...ご協力に感謝します！</string>
+    <string name="bad_pin_code">PIN は間違っています。</string>
+    <string name="restore_words_1">ウォレットの復元には8個ずつ計24個のバックアップフレーズを入力してください。</string>
+    <string name="restore_from_words">単語から復元</string>
+    <string name="restore_words_2">9から16単語まで</string>
+    <string name="restore_words_3">17から24単語まで</string>
+    <string name="fee_recommended">推奨</string>
+    <string name="fee_custom">カスタム</string>
+    <string name="confirmation_time">確認時間</string>
+    <string name="fee_normal">通常</string>
+    <string name="fee_fast">高速</string>
+    <string name="per_kilobyte">キロバイトごと</string>
+    <string name="total_at_least">全体で最小化</string>
+    <string name="fee">手数料</string>
+    <string name="minimum_fee">0.00010000 PHR/kB の最小の手数料を支払い</string>
+    <string name="several_outputs_add_address">アドレスを追加</string>
+    <string name="address_num">アドレス %d </string>
+    <string name="invalid_last_amount">最後に入力された金額は無効です</string>
+    <string name="inputs_explanation">消費するコインを選択</string>
+    <string name="bad_address">アドレスが不正です</string>
+    <string name="invalid_amount_value">枚数の数値が不正です</string>
+    <string name="select_all">全て選択</string>
+    <string name="total_amount">合計:</string>
+    <string name="send_amount_input_error">カスタムインプットを追加する場合、枚数をセットしてください。</string>
+    <string name="tx_detail_amount">合計枚数</string>
+    <string name="tx_detail_inputs_title">ソースのコイン</string>
+    <string name="tx_detail_inputs">%d インプット</string>
+    <string name="txt_detail_confirmations">確認数</string>
+    <string name="tx_detail_no_memo">コメントなし</string>
+    <string name="tx_detail_addresses">アウトプット</string>
+    <string name="custom_fee">カスタム手数料</string>
+    <string name="coin_selection">コインの選択</string>
+    <string name="set_default">デフォルトにセット</string>
+    <string name="delete_addresses">アドレスの削除</string>
+    <string name="sync">同期済み</string>
+    <string name="syncing">同期中</string>
+    <string name="not_connection">接続梨</string>
+    <string name="confimations">確認数</string>
+    <string name="multiple_address_send"> %d アドレスへ送金</string>
+    <string name="fee_per_kb">%s PHR/kB</string>
+    <string name="fee_explanation">カスタム手数料が最小手数料 (0.0001 PHR/kB)より低い場合、最低手数料で送金します。</string>
+    <string name="invalid_fee_amount">手数料が間違っています</string>
+    <string name="load_inputs_fail">コインコントロール失敗</string>
+    <string name="title_tx_weight">ウェイト</string>
+    <string name="no_data_available">データは利用できません</string>
+    <string name="delete">削除</string>
+    <string name="no_coin_selected">コインが選択されていません</string>
+    <string name="multi_send_activity_title">Multi Send</string>
+    <string name="address_book_screen_title">アドレス帳</string>
+    <string name="my_wallet">マイウォレット</string>
+    <string name="settings_screen_title">設定</string>
+    <string name="options_menu">オプションメニュー</string>
+    <string name="delete_address_label_text">アドレスのラベル\n%s\nを削除します。\n\n続行しますか？</string>
+    <string name="address_label_deleted">アドレスラベルが削除されました。</string>
+    <string name="no_available_inputs">利用できるコインがありません。</string>
+    <string name="restore_mnemonic_screen_title">バックアップフレーズから復元</string>
+    <string name="invalid_mnemonic_code">バックアップフレーズが間違っているようです。ご確認ください。</string>
+    <string name="restore_mnemonic">バックアップフレーズからウォレットを復元中..</string>
+    <string name="restore_mnemonic_title">バックアップフレーズから復元</string>
+    <string name="restore_mnemonic_dialog_body">復元はほぼ完了しました。\nブロックチェーンの同期には時間がかかることがあります。</string>
+    <string name="invalid_host">ホスト名が間違っています</string>
+    <string name="validate_multi_send_enabled">MultiSendは有効です</string>
+    <string name="detail_no_available_inputs">利用できるインプットがありません。</string>
+    <string name="report_crash_title">クラッシュをレポート</string>
+    <string name="crash_toast_text">Phore ウォレットクラッシュ</string>
+    <string name="backup_fail">バックアップ失敗</string>
+    <string name="no_peer_connection">ノードへの接続なし</string>
+    <string name="wallet_is_not_sync">ウォレットは同期していません。残高を確認するには、同期完了までお待ちください。</string>
+    <string name="warn_sharing_pub_key">公開鍵をシェアすれば誰でも残高とトランザクション履歴を確認できます。</string>
+    <string name="public_key">公開鍵</string>
+    <string name="derivation_path">派生パス(BIP32)</string>
+    <string name="unknown_error_message">xpubの読み込みにエラーが発生しました。レポートを送ってください。</string>
+    <string name="settings_export_pub_key">アカウントをエクスポート</string>
+    <string name="copy_key_message">キーをコピーしました</string>
+    <string name="hint_paste_xpub">xpubを張り付けてください</string>
+    <string name="explanation_import_xpub">他のウォレットからxpubをインポートすることで閲覧限定のウォレットにしましょう\n\n残高は確認できますが、送金は出来ません。</string>
+    <string name="import_xpub">インポート</string>
+    <string name="settings_import_xpub">閲覧限定モード</string>
+    <string name="screen_title_watch_only">閲覧限定</string>
+    <string name="watch_only_mode_activated">閲覧限定モードを有効にしました</string>
+    <string name="watch_only_mode_activated_text">同期が完了するまでしばらく時間がかかりますがお待ちください。</string>
+    <string name="error_importing_xpub">キーを確認し、エラーレポートを送信してください。</string>
+    <string name="error_importing_xpub_title">xpubのインポートにエラー</string>
+    <string name="error_watch_only_mode">閲覧限定モードでは実行できません。</string>
+    <string name="export_wallet">アカウントのエクスポート</string>
+    <string name="commit_tx_fail">トランザクションの送信に失敗しました。エラーレポートを送信してください。</string>
+
+
+    <!-- Sweep wallet -->
+    <!-- Sweep paper wallet means to redeem coins from a code usually printed on a paper -->
+    <string name="title_activity_sweep_wallet">ペーパーウォレットをスイープ</string>
+    <string name="sweep_wallet_info">コインをペーパーウォレットからPhoreウォレットに送金しようとしています。セキュリティのため、ペーパーウォレットの再使用はおやめください。\n\n対応フォーマット: WIF, BIP38, ミニプライベートキー.</string>
+    <string name="sweep_wallet_key_title">プライベートキー</string>
+    <string name="sweep_wallet_key_password">プライベートキーパスワード</string>
+    <string name="sweep_wallet_key_hint">プライベートキーを入力するかスキャンする</string>
+    <string name="sweep_wallet_bad_format">プライベートキーの形式を認識できません。</string>
+    <string name="sweep_wallet_bad_coin_type">プライベートキーの種類がアカウントと一致しません。</string>
+    <string name="sweep_wallet_bad_password">パスワードが間違っています。</string>
+    <string name="sweep_wallet_zero_coins">プライベートキーはコインを含んでいません。</string>
+    <string name="sweep_wallet_key_wait">ペーパーウォレットのスイープの間お待ちください</string>
+    <!-- &#8230; is the ... character -->
+    <string name="sweep_wallet_key_decoding">プライベートキーの復号化&#8230;</string>
+    <!-- &#8230; is the ... character -->
+    <string name="sweep_wallet_key_loading">残高の読み込み&#8230;</string>
+    <!-- &#8230; is the ... character -->
+    <string name="sweep_wallet_key_signing">トランザクションの生成&#8230;</string>
+    <!-- Fees settings -->
+    <string name="title_activity_transaction_fees">トランザクション手数料</string>
+    <!-- Example: Bitcoin transaction fees-->
+    <string name="tx_fees_title">%1$s のトランザクション手数料</string>
+    <!-- Example: The fee value is per kilobyte.-->
+    <string name="tx_fees_description">トランザクション手数料は %1$s です</string>
+    <string name="tx_fees_per_kilobyte">トランザクションデータ/KB</string>
+    <string name="tx_fees_per_byte">トランザクションデータ/Byte</string>
+    <string name="tx_fees_per_transaction">トランザクションごと</string>
+
+    <!-- Terms -->
+    <string name="terms_of_service_title">利用規約</string>
+    <!-- TODO translate to other languages -->
+    <string name="terms_of_service" translatable="false">免責事項\n
+    \n
+    \n
+    1. Phoreウォレットの使用についてのリスク\n
+    \n
+    Phoreは以下の5つのカテゴリの範囲の事象によるいかなる損失, 賠償, 請求に対して責任を負いません。:\n
+    \n
+    (1) ユーザーがパスワードを忘れる, 間違ったアドレスへの支払い, 誤ってウォレットを削除するなどの暗号通貨におけるソフトウェア・サービスにおけるミス\n
+    \n
+    (2) ウォレットファイルの破損, 不適切なトランザクション生成, 安全でない暗号化ライブラリ, マルウェアなどによるウォレットまたは他のソフトウェア・サービスの問題\n
+    \n
+    (3) ストレージの障害・損傷によるデータ損失などの暗号通貨関連ハードウェア・ソフトウェア・サービスにおける技術的な障害による損失\n
+    \n
+    (4) ユーザーのウォレット・アカウントへの不正なアクセスなどの暗号通貨に関連するソフトウェア・サービスにおけるセキュリティの問題\n
+    \n
+    (5) サービス提供者の破産・情報セキュリティ攻撃・第三者による不正行為などの第三者の行為\n
+    \n
+    \n
+    2. トレード・投資のリスク\n
+    \n
+    暗号通貨のトレードでは、大きなリスクがあります。暗号通貨への投資は関連する市場の価値の変動に非常に大きな影響を受けることがあります。そのため、このような市場での投機を行う際はリスク資金のみを用いて行うことをお勧めします。\n
+    \n
+    \n
+    3. 電子取引のリスク\n
+    \n
+    電子システムを用いて取引を行う前に、サービスを提供する取引所の規則・規約を確認し、取引する商品を確認する必要があります。このような電子取引所には市場の状況・システムのパフォーマンスなどその他の要因によりアクセスへの応答、アクセス時間が異なるため、固有のリスクが存在します。取引前にこれらのリスクや、他のリスクについてもご理解ください。\n
+    \n
+    \n
+    4. 納税義務の遵守\n
+    \n
+    ウォレットのユーザーは暗号通貨取引に適用される税金を決定する責任を個々に負います。我々やこのウォレットは取引へ適用される税の決定に対し責任を負いません。\n
+    \n
+    \n
+    5. 無保証\n
+    \n
+    ウォレットにおいてはウォレット自身も、提供されるコンテンツ・データ・サービスに対してもいかなる保証もなく、\"現状のまま\" 提供されます。\n
+    \n
+    \n
+    6. 責任の制限\n
+    \n
+    法律により要求される場合を除き、いかなる場合においてもウォレットの開発者はウォレットの使用における利益の損失・データの損失などいかなる損害においても責任を負いません。ウォレットの開発者はウォレットにおいてユーザーの取った決定・行動に責任を負いません。\n
+    \n
+    \n
+    7. 仲裁\n
+    \n
+    ウォレットの利用者は著作権・ロゴ・商標・称号・特許に関する紛争を除きウォレット・この免責事項に関連する紛争を仲裁することに同意します。\n
+    \n
+    \n
+    8. 最終修正\n
+    \n
+    この免責事項は、2016年1月1日に改訂されました。</string>
+    <string name="settings_sweep_wallet">ウォレットのスイープ</string>
+    <string name="disconnected_label">接続無し</string>
+    <string name="error_generic">アクション実行中にエラーが発生しました</string>
+    <string name="old_wallet_version">古いバージョンのウォレット</string>
+    <string name="advance_restore">オプション付き復元</string>
+    <string name="restore_bip32_warning">もしバックアップフレーズをバージョン %s より低いウォレットで作成した場合、チェックボックスをクリックして正しくコインを復元してください。</string>
+    <string name="fee_included">手数料は合計数量に含まれていません。</string>
+    <string name="title_blockstore_error">エラー</string>
+    <string name="message_blockstore_error">ブロックチェーンの破損\n\nエラーレポートを送信しバックアップフレーズ・バックアップファイルからの復元を試してください。</string>
+    <string name="upgrade_wallet">ウォレットアップグレード</string>
+    <string name="upgrade_succesfull">アップグレードに成功しました。ウォレットの再同期が終わるまでお待ちください。</string>
+    <string name="write_external_denied">外部ストレージに書き込む権限がありません</string>
+    <string name="message_connection_is_needed">接続がありません。インターネット接続を確認してください。</string>
+    <string name="no_rate">レートなし</string>
+    <string name="change_address_explain">お釣り送金先のアドレスを指定するか、下のボックスをチェックしてお釣りを元のアドレスへ送金します(複数の送り元がある場合、残高が最も大きなアドレスへ送られます)。</string>
+    <string name="change_address_origin">元のアドレスへ送金する</string>
+    <string name="clean">クリーン</string>
+    <string name="origin_address">元アドレス</string>
+    <string name="option_change_address">アドレスを変更</string>
+    <string name="option_custom_fee">カスタム手数料</string>
+    <string name="option_multi_outputs">Multi send</string>
+    <string name="option_coin_selection">コイン選択</string>
+    <string name="change_address_remember">選択を保存</string>
+    <string name="my_address">自分のアドレス</string>
+    <string name="wallet">ウォレット</string>
+    <string name="wallet_phr">PHR</string>
+    <string name="drawer_send">送金</string>
+    <string name="drawer_receive">受け取り</string>
+    <string name="notification_receive_title">PHRを受け取りました</string>
+    <string name="notification_receive_message">%1$s の価値のコインを受け取りました</string>
+    <string name="settings_rates">通貨レート</string>
+    <string name="rate_selected">選択したレート</string>
+
+</resources>
