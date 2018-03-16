@@ -68,7 +68,14 @@
         <activity android:name=".ui.transaction_send_activity.SendTxDetailActivity" android:screenOrientation="portrait"/>
         <activity android:name=".ui.transaction_request_activity.RequestActivity"  android:screenOrientation="portrait"></activity>
         <activity android:name=".ui.qr_activity.QrActivity"/>
-        <activity android:name=".utils.scanner.ScanActivity"/>
+        <activity 
+            android:name=".utils.scanner.ScanActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden"
+            android:screenOrientation="landscape"
+            android:stateNotNeeded="true"
+            android:theme="@style/FullscreenTheme"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+            />
         <activity android:name=".ui.export_account.ExportKeyActivity"/>
         <activity android:name=".ui.import_watch_only.SettingsWatchOnly"/>
         <activity android:name=".ui.settings_rates.SettingsRatesActivity"/>
