@@ -17,6 +17,24 @@
 
 package io.phore.android.utils.scanner;
 
+import java.util.EnumMap;
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.google.zxing.BinaryBitmap;
+import com.google.zxing.DecodeHintType;
+import com.google.zxing.PlanarYUVLuminanceSource;
+import com.google.zxing.ReaderException;
+import com.google.zxing.Result;
+import com.google.zxing.ResultPoint;
+import com.google.zxing.ResultPointCallback;
+import com.google.zxing.common.HybridBinarizer;
+import com.google.zxing.qrcode.QRCodeReader;
+
+import io.phore.android.R;
+
 import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
@@ -40,418 +58,343 @@ import android.os.Process;
 import android.os.Vibrator;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Surface;
 import android.view.TextureView;
 import android.view.TextureView.SurfaceTextureListener;
+import android.view.View;
 import android.view.WindowManager;
-
-import com.google.zxing.BinaryBitmap;
-import com.google.zxing.DecodeHintType;
-import com.google.zxing.PlanarYUVLuminanceSource;
-import com.google.zxing.ReaderException;
-import com.google.zxing.Result;
-import com.google.zxing.ResultPoint;
-import com.google.zxing.ResultPointCallback;
-import com.google.zxing.common.HybridBinarizer;
-import com.google.zxing.qrcode.QRCodeReader;
-
-import java.util.EnumMap;
-import java.util.Map;
-
-import io.phore.android.R;
-import io.phore.android.utils.DialogBuilder;
-
 
 /**
  * @author Andreas Schildbach
  */
 @SuppressWarnings("deprecation")
-public final class ScanActivity extends Activity implements SurfaceTextureListener, ActivityCompat.OnRequestPermissionsResultCallback
-{
-	public static final String INTENT_EXTRA_RESULT = "result";
+public final class ScanActivity extends Activity
+        implements SurfaceTextureListener, ActivityCompat.OnRequestPermissionsResultCallback {
+    public static final String INTENT_EXTRA_RESULT = "result";
 
-	private static final long VIBRATE_DURATION = 50L;
-	private static final long AUTO_FOCUS_INTERVAL_MS = 2500L;
+    private static final long VIBRATE_DURATION = 50L;
+    private static final long AUTO_FOCUS_INTERVAL_MS = 2500L;
 
-	private final CameraManager cameraManager = new CameraManager();
-	private ScannerView scannerView;
-	private TextureView previewView;
-	private volatile boolean surfaceCreated = false;
+    private final CameraManager cameraManager = new CameraManager();
+    private ScannerView scannerView;
+    private TextureView previewView;
+    private volatile boolean surfaceCreated = false;
 
-	private Vibrator vibrator;
-	private HandlerThread cameraThread;
-	private volatile Handler cameraHandler;
+    private Vibrator vibrator;
+    private HandlerThread cameraThread;
+    private volatile Handler cameraHandler;
 
-	private static boolean DISABLE_CONTINUOUS_AUTOFOCUS = Build.MODEL.equals("GT-I9100") // Galaxy S2
-			|| Build.MODEL.equals("SGH-T989") // Galaxy S2
-			|| Build.MODEL.equals("SGH-T989D") // Galaxy S2 X
-			|| Build.MODEL.equals("SAMSUNG-SGH-I727") // Galaxy S2 Skyrocket
-			|| Build.MODEL.equals("GT-I9300") // Galaxy S3
-			|| Build.MODEL.equals("GT-N7000"); // Galaxy Note
+    private static boolean DISABLE_CONTINUOUS_AUTOFOCUS = Build.MODEL.equals("GT-I9100") // Galaxy S2
+            || Build.MODEL.equals("SGH-T989") // Galaxy S2
+            || Build.MODEL.equals("SGH-T989D") // Galaxy S2 X
+            || Build.MODEL.equals("SAMSUNG-SGH-I727") // Galaxy S2 Skyrocket
+            || Build.MODEL.equals("GT-I9300") // Galaxy S3
+            || Build.MODEL.equals("GT-N7000"); // Galaxy Note
 
-	private static final String TAG = "ScanActivity";
+    private static final Logger log = LoggerFactory.getLogger(ScanActivity.class);
 
-	@Override
-	public void onCreate(final Bundle savedInstanceState)
-	{
-		super.onCreate(savedInstanceState);
+    @Override
+    public void onCreate(final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-		vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
-		setContentView(R.layout.scan_activity);
-		scannerView = (ScannerView) findViewById(R.id.scan_activity_mask);
-		previewView = (TextureView) findViewById(R.id.scan_activity_preview);
-		previewView.setSurfaceTextureListener(this);
+        setContentView(R.layout.scan_activity);
+        scannerView = (ScannerView) findViewById(R.id.scan_activity_mask);
+        previewView = (TextureView) findViewById(R.id.scan_activity_preview);
+        previewView.setSurfaceTextureListener(this);
 
-		cameraThread = new HandlerThread("cameraThread", Process.THREAD_PRIORITY_BACKGROUND);
-		cameraThread.start();
-		cameraHandler = new Handler(cameraThread.getLooper());
+        cameraThread = new HandlerThread("cameraThread", Process.THREAD_PRIORITY_BACKGROUND);
+        cameraThread.start();
+        cameraHandler = new Handler(cameraThread.getLooper());
 
-		if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
-			ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.CAMERA }, 0);
-	}
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
+            ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.CAMERA }, 0);
+    }
 
-	@Override
-	protected void onResume()
-	{
-		super.onResume();
+    @Override
+    protected void onResume() {
+        super.onResume();
 
-		maybeOpenCamera();
-	}
+        maybeOpenCamera();
+    }
 
-	@Override
-	protected void onStart() {
-		super.onStart();
+    @Override
+    protected void onPause() {
+        cameraHandler.post(closeRunnable);
 
-	}
+        super.onPause();
+    }
 
-	@Override
-	protected void onPause()
-	{
-		cameraHandler.post(closeRunnable);
+    @Override
+    protected void onDestroy() {
+        // cancel background thread
+        cameraHandler.removeCallbacksAndMessages(null);
+        cameraThread.quit();
 
-		super.onPause();
-	}
+        previewView.setSurfaceTextureListener(null);
 
-	@Override
-	protected void onDestroy()
-	{
-		// cancel background thread
-		cameraHandler.removeCallbacksAndMessages(null);
-		cameraThread.quit();
+        super.onDestroy();
+    }
 
-		previewView.setSurfaceTextureListener(null);
+    @Override
+    public void onRequestPermissionsResult(final int requestCode, final String[] permissions,
+            final int[] grantResults) {
+        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+            maybeOpenCamera();
+        else
+            WarnDialogFragment
+                    .newInstance(R.string.scan_camera_permission_dialog_title,
+                            getString(R.string.scan_camera_permission_dialog_message))
+                    .show(getFragmentManager(), "dialog");
 
-		super.onDestroy();
-	}
+    }
 
-	@Override
-	public void onRequestPermissionsResult(final int requestCode, final String[] permissions, final int[] grantResults)
-	{
-		if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
-			maybeOpenCamera();
-		else
-			WarnDialogFragment.newInstance(R.string.scan_camera_permission_dialog_title, getString(R.string.scan_camera_permission_dialog_message))
-					.show(getFragmentManager(), "dialog");
+    private void maybeOpenCamera() {
+        if (surfaceCreated && ContextCompat.checkSelfPermission(this,
+                Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED)
+            cameraHandler.post(openRunnable);
+    }
 
-	}
+    @Override
+    public void onSurfaceTextureAvailable(final SurfaceTexture surface, final int width, final int height) {
+        surfaceCreated = true;
+        maybeOpenCamera();
+    }
 
-	private void maybeOpenCamera()
-	{
-		if (surfaceCreated && ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED)
-			cameraHandler.post(openRunnable);
-	}
+    @Override
+    public boolean onSurfaceTextureDestroyed(final SurfaceTexture surface) {
+        surfaceCreated = false;
+        return true;
+    }
 
-	@Override
-	public void onSurfaceTextureAvailable(final SurfaceTexture surface, final int width, final int height)
-	{
-		surfaceCreated = true;
-		maybeOpenCamera();
-	}
+    @Override
+    public void onSurfaceTextureSizeChanged(final SurfaceTexture surface, final int width, final int height) {
+    }
 
-	@Override
-	public boolean onSurfaceTextureDestroyed(final SurfaceTexture surface)
-	{
-		surfaceCreated = false;
-		return true;
-	}
+    @Override
+    public void onSurfaceTextureUpdated(final SurfaceTexture surface) {
+    }
 
-	@Override
-	public void onSurfaceTextureSizeChanged(final SurfaceTexture surface, final int width, final int height)
-	{
-	}
+    @Override
+    public void onAttachedToWindow() {
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
+    }
 
-	@Override
-	public void onSurfaceTextureUpdated(final SurfaceTexture surface)
-	{
-	}
+    @Override
+    public void onBackPressed() {
+        scannerView.setVisibility(View.GONE);
+        setResult(RESULT_CANCELED);
+        postFinish();
+    }
 
-	@Override
-	public void onAttachedToWindow()
-	{
-		getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
-	}
+    @Override
+    public boolean onKeyDown(final int keyCode, final KeyEvent event) {
+        switch (keyCode) {
+        case KeyEvent.KEYCODE_FOCUS:
+        case KeyEvent.KEYCODE_CAMERA:
+            // don't launch camera app
+            return true;
+        case KeyEvent.KEYCODE_VOLUME_DOWN:
+        case KeyEvent.KEYCODE_VOLUME_UP:
+            cameraHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    cameraManager.setTorch(keyCode == KeyEvent.KEYCODE_VOLUME_UP);
+                }
+            });
+            return true;
+        }
 
-	@Override
-	public void onBackPressed()
-	{
-		setResult(RESULT_CANCELED);
-		finish();
-	}
+        return super.onKeyDown(keyCode, event);
+    }
 
-	@Override
-	public boolean onKeyDown(final int keyCode, final KeyEvent event)
-	{
-		switch (keyCode)
-		{
-			case KeyEvent.KEYCODE_FOCUS:
-			case KeyEvent.KEYCODE_CAMERA:
-				// don't launch camera app
-				return true;
-			case KeyEvent.KEYCODE_VOLUME_DOWN:
-			case KeyEvent.KEYCODE_VOLUME_UP:
-				cameraHandler.post(new Runnable()
-				{
-					@Override
-					public void run()
-					{
-						cameraManager.setTorch(keyCode == KeyEvent.KEYCODE_VOLUME_UP);
-					}
-				});
-				return true;
-		}
+    public void handleResult(final Result scanResult) {
+        vibrator.vibrate(VIBRATE_DURATION);
 
-		return super.onKeyDown(keyCode, event);
-	}
+        scannerView.setIsResult(true);
 
-	public void handleResult(final Result scanResult)
-	{
-		vibrator.vibrate(VIBRATE_DURATION);
+        final Intent result = new Intent();
+        result.putExtra(INTENT_EXTRA_RESULT, scanResult.getText());
+        setResult(RESULT_OK, result);
+        postFinish();
+    }
 
-		scannerView.setIsResult(true);
+    private void postFinish() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                finish();
+            }
+        }, 50);
+    }
 
-		final Intent result = new Intent();
-		result.putExtra(INTENT_EXTRA_RESULT, scanResult.getText());
-		setResult(RESULT_OK, result);
+    private final Runnable openRunnable = new Runnable() {
+        @Override
+        public void run() {
+            try {
+                final Camera camera = cameraManager.open(previewView, displayRotation(), !DISABLE_CONTINUOUS_AUTOFOCUS);
 
-		// delayed finish
-		new Handler().post(new Runnable()
-		{
-			@Override
-			public void run()
-			{
-				finish();
-			}
-		});
-	}
+                final Rect framingRect = cameraManager.getFrame();
+                final RectF framingRectInPreview = new RectF(cameraManager.getFramePreview());
+                framingRectInPreview.offsetTo(0, 0);
+                final boolean cameraFlip = cameraManager.getFacing() == CameraInfo.CAMERA_FACING_FRONT;
+                final int cameraRotation = cameraManager.getOrientation();
 
-	private final Runnable openRunnable = new Runnable()
-	{
-		@Override
-		public void run()
-		{
-			try
-			{
-				final Camera camera = cameraManager.open(previewView, displayRotation(), !DISABLE_CONTINUOUS_AUTOFOCUS);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        scannerView.setFraming(framingRect, framingRectInPreview, displayRotation(), cameraRotation,
+                                cameraFlip);
+                    }
+                });
 
-				final Rect framingRect = cameraManager.getFrame();
-				final RectF framingRectInPreview = new RectF(cameraManager.getFramePreview());
-				framingRectInPreview.offsetTo(0, 0);
-				final boolean cameraFlip = cameraManager.getFacing() == CameraInfo.CAMERA_FACING_FRONT;
-				final int cameraRotation = cameraManager.getOrientation();
+                final String focusMode = camera.getParameters().getFocusMode();
+                final boolean nonContinuousAutoFocus = Camera.Parameters.FOCUS_MODE_AUTO.equals(focusMode)
+                        || Camera.Parameters.FOCUS_MODE_MACRO.equals(focusMode);
 
-				runOnUiThread(new Runnable()
-				{
-					@Override
-					public void run()
-					{
-						scannerView.setFraming(framingRect, framingRectInPreview, displayRotation(), cameraRotation, cameraFlip);
-					}
-				});
+                if (nonContinuousAutoFocus)
+                    cameraHandler.post(new AutoFocusRunnable(camera));
 
-				final String focusMode = camera.getParameters().getFocusMode();
-				final boolean nonContinuousAutoFocus = Camera.Parameters.FOCUS_MODE_AUTO.equals(focusMode)
-						|| Camera.Parameters.FOCUS_MODE_MACRO.equals(focusMode);
+                cameraHandler.post(fetchAndDecodeRunnable);
+            } catch (final Exception x) {
+                log.info("problem opening camera", x);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (!isFinishing())
+                            WarnDialogFragment
+                                    .newInstance(R.string.scan_camera_problem_dialog_title,
+                                            getString(R.string.scan_camera_problem_dialog_message))
+                                    .show(getFragmentManager(), "dialog");
+                    }
+                });
+            }
+        }
 
-				if (nonContinuousAutoFocus)
-					cameraHandler.post(new AutoFocusRunnable(camera));
+        private int displayRotation() {
+            final int rotation = getWindowManager().getDefaultDisplay().getRotation();
+            if (rotation == Surface.ROTATION_0)
+                return 0;
+            else if (rotation == Surface.ROTATION_90)
+                return 90;
+            else if (rotation == Surface.ROTATION_180)
+                return 180;
+            else if (rotation == Surface.ROTATION_270)
+                return 270;
+            else
+                throw new IllegalStateException("rotation: " + rotation);
+        }
+    };
 
-				cameraHandler.post(fetchAndDecodeRunnable);
-			}
-			catch (final Exception x)
-			{
-				Log.i(TAG,"problem opening camera", x);
-				runOnUiThread(new Runnable()
-				{
-					@Override
-					public void run()
-					{
-						if (!isFinishing())
-							WarnDialogFragment
-									.newInstance(R.string.scan_camera_problem_dialog_title, getString(R.string.scan_camera_problem_dialog_message))
-									.show(getFragmentManager(), "dialog");
-					}
-				});
-			}
-		}
+    private final Runnable closeRunnable = new Runnable() {
+        @Override
+        public void run() {
+            cameraHandler.removeCallbacksAndMessages(null);
+            cameraManager.close();
+        }
+    };
 
-		private int displayRotation()
-		{
-			final int rotation = getWindowManager().getDefaultDisplay().getRotation();
-			if (rotation == Surface.ROTATION_0)
-				return 0;
-			else if (rotation == Surface.ROTATION_90)
-				return 90;
-			else if (rotation == Surface.ROTATION_180)
-				return 180;
-			else if (rotation == Surface.ROTATION_270)
-				return 270;
-			else
-				throw new IllegalStateException("rotation: " + rotation);
-		}
-	};
+    private final class AutoFocusRunnable implements Runnable {
+        private final Camera camera;
 
-	private final Runnable closeRunnable = new Runnable()
-	{
-		@Override
-		public void run()
-		{
-			cameraHandler.removeCallbacksAndMessages(null);
-			cameraManager.close();
-		}
-	};
+        public AutoFocusRunnable(final Camera camera) {
+            this.camera = camera;
+        }
 
-	private final class AutoFocusRunnable implements Runnable
-	{
-		private final Camera camera;
+        @Override
+        public void run() {
+            try {
+                camera.autoFocus(autoFocusCallback);
+            } catch (final Exception x) {
+                log.info("problem with auto-focus, will not schedule again", x);
+            }
+        }
 
-		public AutoFocusRunnable(final Camera camera)
-		{
-			this.camera = camera;
-		}
+        private final Camera.AutoFocusCallback autoFocusCallback = new Camera.AutoFocusCallback() {
+            @Override
+            public void onAutoFocus(final boolean success, final Camera camera) {
+                // schedule again
+                cameraHandler.postDelayed(AutoFocusRunnable.this, AUTO_FOCUS_INTERVAL_MS);
+            }
+        };
+    }
 
-		@Override
-		public void run()
-		{
-			try
-			{
-				camera.autoFocus(autoFocusCallback);
-			}
-			catch (final Exception x)
-			{
-				Log.i(TAG,"problem with auto-focus, will not schedule again", x);
-			}
-		}
+    private final Runnable fetchAndDecodeRunnable = new Runnable() {
+        private final QRCodeReader reader = new QRCodeReader();
+        private final Map<DecodeHintType, Object> hints = new EnumMap<DecodeHintType, Object>(DecodeHintType.class);
 
-		private final Camera.AutoFocusCallback autoFocusCallback = new Camera.AutoFocusCallback()
-		{
-			@Override
-			public void onAutoFocus(final boolean success, final Camera camera)
-			{
-				// schedule again
-				cameraHandler.postDelayed(AutoFocusRunnable.this, AUTO_FOCUS_INTERVAL_MS);
-			}
-		};
-	}
+        @Override
+        public void run() {
+            cameraManager.requestPreviewFrame(new PreviewCallback() {
+                @Override
+                public void onPreviewFrame(final byte[] data, final Camera camera) {
+                    decode(data);
+                }
+            });
+        }
 
-	private final Runnable fetchAndDecodeRunnable = new Runnable()
-	{
-		private final QRCodeReader reader = new QRCodeReader();
-		private final Map<DecodeHintType, Object> hints = new EnumMap<DecodeHintType, Object>(DecodeHintType.class);
+        private void decode(final byte[] data) {
+            final PlanarYUVLuminanceSource source = cameraManager.buildLuminanceSource(data);
+            final BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
 
-		@Override
-		public void run()
-		{
-			cameraManager.requestPreviewFrame(new PreviewCallback()
-			{
-				@Override
-				public void onPreviewFrame(final byte[] data, final Camera camera)
-				{
-					decode(data);
-				}
-			});
-		}
+            try {
+                hints.put(DecodeHintType.NEED_RESULT_POINT_CALLBACK, new ResultPointCallback() {
+                    @Override
+                    public void foundPossibleResultPoint(final ResultPoint dot) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                scannerView.addDot(dot);
+                            }
+                        });
+                    }
+                });
+                final Result scanResult = reader.decode(bitmap, hints);
 
-		private void decode(final byte[] data)
-		{
-			final PlanarYUVLuminanceSource source = cameraManager.buildLuminanceSource(data);
-			final BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        handleResult(scanResult);
+                    }
+                });
+            } catch (final ReaderException x) {
+                // retry
+                cameraHandler.post(fetchAndDecodeRunnable);
+            } finally {
+                reader.reset();
+            }
+        }
+    };
 
-			try
-			{
-				hints.put(DecodeHintType.NEED_RESULT_POINT_CALLBACK, new ResultPointCallback()
-				{
-					@Override
-					public void foundPossibleResultPoint(final ResultPoint dot)
-					{
-						runOnUiThread(new Runnable()
-						{
-							@Override
-							public void run()
-							{
-								scannerView.addDot(dot);
-							}
-						});
-					}
-				});
-				final Result scanResult = reader.decode(bitmap, hints);
+    public static class WarnDialogFragment extends DialogFragment {
+        public static WarnDialogFragment newInstance(final int titleResId, final String message) {
+            final WarnDialogFragment fragment = new WarnDialogFragment();
+            final Bundle args = new Bundle();
+            args.putInt("title", titleResId);
+            args.putString("message", message);
+            fragment.setArguments(args);
+            return fragment;
+        }
 
-				runOnUiThread(new Runnable()
-				{
-					@Override
-					public void run()
-					{
-						handleResult(scanResult);
-					}
-				});
-			}
-			catch (final ReaderException x)
-			{
-				// retry
-				cameraHandler.post(fetchAndDecodeRunnable);
-			}
-			finally
-			{
-				reader.reset();
-			}
-		}
-	};
+        @Override
+        public Dialog onCreateDialog(final Bundle savedInstanceState) {
+            final Bundle args = getArguments();
+            final DialogBuilder dialog = DialogBuilder.warn(getActivity(), args.getInt("title"));
+            dialog.setMessage(args.getString("message"));
+            dialog.singleDismissButton(new OnClickListener() {
+                @Override
+                public void onClick(final DialogInterface dialog, final int which) {
+                    getActivity().finish();
+                }
+            });
+            return dialog.create();
+        }
 
-	public static class WarnDialogFragment extends DialogFragment
-	{
-		public static WarnDialogFragment newInstance(final int titleResId, final String message)
-		{
-			final WarnDialogFragment fragment = new WarnDialogFragment();
-			final Bundle args = new Bundle();
-			args.putInt("title", titleResId);
-			args.putString("message", message);
-			fragment.setArguments(args);
-			return fragment;
-		}
-
-		@Override
-		public Dialog onCreateDialog(final Bundle savedInstanceState)
-		{
-			final Bundle args = getArguments();
-			final DialogBuilder dialog = DialogBuilder.warn(getActivity(), args.getInt("title"));
-			dialog.setMessage(args.getString("message"));
-			dialog.singleDismissButton(new OnClickListener()
-			{
-				@Override
-				public void onClick(final DialogInterface dialog, final int which)
-				{
-					getActivity().finish();
-				}
-			});
-			return dialog.create();
-		}
-
-		@Override
-		public void onCancel(final DialogInterface dialog)
-		{
-			getActivity().finish();
-		}
-	}
+        @Override
+        public void onCancel(final DialogInterface dialog) {
+            getActivity().finish();
+        }
+    }
 }
