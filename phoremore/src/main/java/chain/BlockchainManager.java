@@ -246,7 +246,9 @@ public class BlockchainManager {
                 final String[] trustedPeerHosts = conf.getTrustedNodes();
                 final boolean hasTrustedPeer = trustedPeerHosts.length > 0;
 
-                final boolean connectTrustedPeerOnly = true;//hasTrustedPeer && config.getTrustedPeerOnly();
+                // Note: In the future, make this configurable. If the UI ever
+                // supports configuring a trusted node, this becomes important
+                final boolean connectTrustedPeerOnly = false;
                 peerGroup.setMaxConnections(maxConnectedPeers);
                 peerGroup.setConnectTimeoutMillis(conf.getPeerTimeoutMs());
                 peerGroup.setPeerDiscoveryTimeoutMillis(conf.getPeerDiscoveryTimeoutMs());

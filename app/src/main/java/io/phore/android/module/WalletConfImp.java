@@ -41,12 +41,7 @@ public class WalletConfImp extends Configurations implements WalletConfiguration
 
     @Override
     public String[] getTrustedNodes() {
-        return new String[] {
-          "217.182.83.168",
-          "207.246.120.133",
-          "207.148.26.232",
-          "phore.timhorton.ninja",
-        };
+        return new String[] { };
     }
 
     @Override
