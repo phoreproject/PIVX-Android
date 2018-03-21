@@ -303,7 +303,7 @@
     <!-- Terms -->
     <string name="terms_of_service_title">利用規約</string>
     <!-- TODO translate to other languages -->
-    <string name="terms_of_service" translatable="false">免責事項\n
+    <string name="terms_of_service">免責事項\n
     \n
     \n
     1. Phoreウォレットの使用についてのリスク\n
