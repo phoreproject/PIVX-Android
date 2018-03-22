@@ -22,11 +22,11 @@
     <string name="appbar_scrolling_view_behavior">スクロール?</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="set_amount">送金量を記入</string>
+    <string name="set_amount">送金枚数を記入</string>
     <string name="set_amount_phr">PHR</string>
     <string name="set_amount_usd">USD</string>
     <string name="add_all">すべて追加</string>
-    <string name="title_amount">量</string>
+    <string name="title_amount">枚数</string>
     <string name="title_address">アドレス</string>
     <string name="title_name">名前</string>
     <string name="title_description">説明</string>
@@ -41,7 +41,7 @@
     <string name="settings_subtitle_security">セキュリティ</string>
     <string name="settings_subtitle_preference">優先度</string>
     <string name="backup_wallet_message">バックアップは暗号化され\n外部ストレージに保存されます。</string>
-    <string name="settings_subtitle_about">中断</string>
+    <string name="settings_subtitle_about">サブタイトル</string>
     <string name="restore_wallet">ウォレットの復元</string>
     <string name="backup_wallet">ウォレットのバックアップ</string>
     <string name="change_pincode">PINコードの変更</string>
@@ -91,7 +91,7 @@
     <string name="backup_restore">復元</string>
     <string name="import_export_keys_dialog_failure_title">ウォレットの復元に失敗</string>
     <string name="import_keys_dialog_failure">バックアップデータのインポートに失敗\n%s</string>
-    <string name="button_dismiss">却下?</string>
+    <string name="button_dismiss">いいえ</string>
     <string name="button_retry">再試行</string>
     <string name="restore_wallet_dialog_success">ウォレットを復元しました</string>
     <string name="restore_wallet_dialog_success_replay">ウォレットの復元に成功しました。残高の取得は少し時間がかかることがあります。</string>
