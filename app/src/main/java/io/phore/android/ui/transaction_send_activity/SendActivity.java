@@ -251,6 +251,12 @@ public class SendActivity extends BaseActivity implements View.OnClickListener {
     }
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+		dismissErrorDialog();
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.send_menu,menu);
         return super.onCreateOptionsMenu(menu);
@@ -579,6 +585,12 @@ public class SendActivity extends BaseActivity implements View.OnClickListener {
 
         super.onActivityResult(requestCode, resultCode, data);
     }
+
+    private void dismissErrorDialog() {
+		if (errorDialog != null) {
+			errorDialog.dismiss();
+		}
+	}
 
     private void showErrorDialog(int resStr){
         showErrorDialog(getString(resStr));
