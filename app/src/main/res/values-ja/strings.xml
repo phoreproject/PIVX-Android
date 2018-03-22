@@ -19,7 +19,7 @@
     <string name="action_qr">QR コード</string>
     <string name="action_add">連絡先の追加</string>
     <string name="string_password">パスワード</string>
-    <string name="appbar_scrolling_view_behavior">スクロール?</string>
+    <string name="appbar_scrolling_view_behavior">スクロール</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="set_amount">送金枚数を記入</string>
@@ -95,7 +95,7 @@
     <string name="button_retry">再試行</string>
     <string name="restore_wallet_dialog_success">ウォレットを復元しました</string>
     <string name="restore_wallet_dialog_success_replay">ウォレットの復元に成功しました。残高の取得は少し時間がかかることがあります。</string>
-    <string name="unavailable">利用できない枚数:</string>
+    <string name="unavailable">利用可能な枚数:</string>
     <string name="sending_tx">トランザクション送信中..</string>
     <string name="currency_message">地域通貨を選択してください</string>
     <string name="title_fee">手数料</string>
@@ -220,7 +220,7 @@
     <string name="delete_addresses">アドレスの削除</string>
     <string name="sync">同期済み</string>
     <string name="syncing">同期中</string>
-    <string name="not_connection">接続梨</string>
+    <string name="not_connection">接続無し</string>
     <string name="confimations">確認数</string>
     <string name="multiple_address_send"> %d アドレスへ送金</string>
     <string name="fee_per_kb">%s PHR/kB</string>
