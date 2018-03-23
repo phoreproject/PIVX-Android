@@ -145,7 +145,7 @@
     <string name="copy">Copy</string>
     <string name="share">Share</string>
     <string name="copy_message">Address copied to the clipboard</string>
-    <string name="security_message">Please write this in a safe place and in horizontal order, you\'ll need them to restore your wallet.\n\nDon\'t share this words to anybody. Be careful, whoever has this words is the owner of the coins!</string>
+    <string name="security_message">Please write these down in a safe place and in horizontal order, you\'ll need them to restore your wallet.\n\nDon\'t share these words with anyone. Be careful, whoever has these words is the owner of the PHR in the wallet!</string>
     <string name="security_message_confirmation">You have to confirm in the next screen</string>
     <string name="confirmation_message">Verify your security words</string>
     <string name="order_message_confirmation">Choose the words in the right order</string>
@@ -164,7 +164,7 @@
     <string name="number_nine">9</string>
     <string name="btn_clear">Clear</string>
     <string name="btn_backspace">Back</string>
-    <string name="pincode_saved">New pin saved</string>
+    <string name="pincode_saved">New PIN saved</string>
     <string name="insert_old_pin">Insert your current PIN</string>
     <string name="insert_new_pin">Insert new PIN</string>
     <string name="invalid_pincode">Invalid PIN</string>
@@ -175,10 +175,10 @@
     <string name="button_ok">Ok</string>
     <string name="backup_succed_dialog">backup_succed_dialog</string>
     <string name="error_no_connectivity_title">No internet connection</string>
-    <string name="error_no_connectivity_body">The app is going to save your transaction until the connection back.\nDo you want to continue?</string>
+    <string name="error_no_connectivity_body">The app is going to save your transaction until the connection comes back.\nDo you want to continue?</string>
     <string name="cannot_restore_wallet">Error, cannot restore wallet\nplease verify your password</string>
     <string name="dialog_reset_blockchain_title">Reset Blockchain</string>
-    <string name="dialog_reset_blockchain_body">Your blockchain file is going to be reseted.\nThe synchronization could take a while.\n\nAre you sure?</string>
+    <string name="dialog_reset_blockchain_body">Your blockchain file is going to be reset.\nSynchronization could take a while.\n\nAre you sure?</string>
     <string name="reseting_blockchain">Reseting blockchain..</string>
     <string name="donations">Donations</string>
     <string name="donation_message">Donations help with the maintenance and development of the app.\nThanks in advance.</string>
