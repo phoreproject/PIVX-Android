@@ -13,3 +13,4 @@ gradlew.bat
 gradlew
 gradle.properties
 .idea
+app/release
