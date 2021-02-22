@@ -14,3 +14,12 @@ gradlew
 gradle.properties
 .idea
 app/release
+*.dat
+checkpoints
+checkpoints-testnet.txt
+checkpoints.txt
+*.txt
+.gradle/
+*.log
+*.DS_Store
+*.db
