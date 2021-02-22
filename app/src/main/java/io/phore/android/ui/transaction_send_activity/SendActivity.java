@@ -177,6 +177,7 @@ public class SendActivity extends BaseActivity implements View.OnClickListener {
         addAll.setOnClickListener(this);
         phoreRate = phoreModule.getRate(phoreApplication.getAppConf().getSelectedRateCoin());
 
+        txt_local_currency.setText("0 " + phoreRate.getCode());
         editCurrency.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
