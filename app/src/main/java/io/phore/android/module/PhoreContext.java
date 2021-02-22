@@ -16,7 +16,7 @@ import java.io.File;
 
 public class PhoreContext {
 
-    public static final boolean IS_TEST = false;
+    public static final boolean IS_TEST = true;
     public static final NetworkParameters NETWORK_PARAMETERS = IS_TEST? TestNet3Params.get():MainNetParams.get();
     public static final Context CONTEXT = new Context(NETWORK_PARAMETERS);
 
